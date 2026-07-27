@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Marathon 2026 — Run for Glory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- ========== LOADER ========== -->
+    <div class="loader" id="loader">
+        <div class="loader-ring"></div>
+        <span>Loading the spirit of India…</span>
+    </div>
+
+    <!-- ========== NAV ========== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">
+            <span class="brand-icon">🏃</span>
+            <span class="brand-text">India Marathon</span>
+        </div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#route">Route</a>
+            <a href="#register" class="nav-cta">Register</a>
+        </div>
+    </nav>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero" id="home">
+        <!-- Animated background layers -->
+        <div class="hero-bg">
+            <div class="tricolor-stripe stripe-saffron"></div>
+            <div class="tricolor-stripe stripe-white"></div>
+            <div class="tricolor-stripe stripe-green"></div>
+        </div>
+
+        <!-- Floating particles -->
+        <canvas id="particleCanvas"></canvas>
+
+        <!-- Ashoka Chakra in background -->
+        <div class="ashoka-chakra-bg">
+            <svg viewBox="0 0 200 200" class="chakra-svg">
+                <circle cx="100" cy="100" r="95" fill="none" stroke="rgba(0,56,168,0.08)" stroke-width="2"/>
+                <circle cx="100" cy="100" r="75" fill="none" stroke="rgba(0,56,168,0.06)" stroke-width="1"/>
+                <circle cx="100" cy="100" r="2" fill="rgba(0,56,168,0.15)"/>
+                {% for i in range(24) %}
+                <line x1="100" y1="100" x2="100" y2="25" stroke="rgba(0,56,168,0.1)" stroke-width="1.5"
+                      transform="rotate({{ i * 15 }}, 100, 100)"/>
+                {% endfor %}
+            </svg>
+        </div>
+
+        <!-- Running silhouettes layer -->
+        <div class="runners-track" id="runnersTrack">
+            <div class="runner runner-1">🏃‍♂️</div>
+            <div class="runner runner-2">🏃‍♀️</div>
+            <div class="runner runner-3">🏃</div>
+            <div class="runner runner-4">🏃‍♂️</div>
+            <div class="runner runner-5">🏃‍♀️</div>
+        </div>
+
+        <!-- Hero content -->
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span> Presented by India Marathon Foundation
+            </div>
+            <h1 class="hero-title">
+                <span class="title-line">Run Through</span>
+                <span class="title-line accent">Incredible India</span>
+            </h1>
+            <p class="hero-subtitle">
+                Join thousands of runners from across the globe. Experience the vibrant culture,
+                heritage, and spirit of India — one stride at a time.
+            </p>
+            <div class="hero-cta-group">
+                <a href="https://konfhub.com" target="_blank" rel="noopener" class="btn-primary">
+                    <span>Register on Konfhub</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#about" class="btn-secondary">Learn More</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" data-count="42000">0</span>
+                    <span class="stat-label">Runners</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-count="42">0</span>
+                    <span class="stat-label">Kilometers</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-count="28">0</span>
+                    <span class="stat-label">States Represented</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator">
+            <span>Scroll to explore</span>
+            <div class="scroll-mouse">
+                <div class="scroll-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT / CULTURE SECTION ========== -->
+    <section class="about" id="about">
+        <div class="about-bg-pattern"></div>
+        <div class="section-header">
+            <span class="section-tag">The Spirit of India</span>
+            <h2>A Marathon Like No Other</h2>
+            <p>Run past ancient forts, through bustling bazaars, alongside serene rivers — every kilometer tells a story.</p>
+        </div>
+
+        <div class="culture-cards">
+            <div class="culture-card" data-scroll>
+                <div class="card-icon">🕌</div>
+                <h3>Heritage Route</h3>
+                <p>Run through UNESCO World Heritage sites and centuries-old architecture that defines India's soul.</p>
+            </div>
+            <div class="culture-card" data-scroll>
+                <div class="card-icon">🎭</div>
+                <h3>Cultural Extravaganza</h3>
+                <p>Experience live folk dances, music, and art from every corner of India along the route.</p>
+            </div>
+            <div class="culture-card" data-scroll>
+                <div class="card-icon">🍛</div>
+                <h3>Flavors of India</h3>
+                <p>Refuel with authentic regional cuisines at every aid station — from idlis to kebabs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ROUTE SECTION ========== -->
+    <section class="route" id="route">
+        <div class="section-header">
+            <span class="section-tag">The Journey</span>
+            <h2>Race Day Experience</h2>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item" data-scroll>
+                <div class="timeline-marker">
+                    <span class="marker-num">5K</span>
+                </div>
+                <div class="timeline-content">
+                    <h3>Sunrise Start</h3>
+                    <p>The tricolor flag waves as you begin your journey at dawn, with the aroma of marigolds in the air.</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-scroll>
+                <div class="timeline-marker">
+                    <span class="marker-num">21K</span>
+                </div>
+                <div class="timeline-content">
+                    <h3>Halfway Mark</h3>
+                    <p>Dhol beats and cheering crowds push you through the halfway point. The energy is electric.</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-scroll>
+                <div class="timeline-marker">
+                    <span class="marker-num">35K</span>
+                </div>
+                <div class="timeline-content">
+                    <h3>The Push</h3>
+                    <p>The iconic India Gate looms ahead. Find your second wind as the city cheers your name.</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-scroll>
+                <div class="timeline-marker finish">
+                    <span class="marker-num">42K</span>
+                </div>
+                <div class="timeline-content">
+                    <h3>Finish Line Glory</h3>
+                    <p>Cross the finish line to a crescendo of celebrations. You didn't just run — you became part of India's story.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CTA / REGISTER SECTION ========== -->
+    <section class="register" id="register">
+        <!-- Floating rangoli pattern -->
+        <div class="rangoli-bg"></div>
+
+        <div class="register-content">
+            <h2>Ready to Make History?</h2>
+            <p>Spots are filling fast. Secure your place at the starting line today.</p>
+            <a href="https://konfhub.com" target="_blank" rel="noopener" class="btn-primary btn-large pulse-animation">
+                <span>Register on Konfhub</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+            <p class="register-note">Registration powered by Konfhub • Secure & hassle-free</p>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="brand-icon">🏃</span>
+                <span>India Marathon 2026</span>
+            </div>
+            <p class="footer-tagline">One race. One nation. One spirit.</p>
+            <div class="footer-bottom">
+                <span>&copy; 2026 India Marathon Foundation. All rights reserved.</span>
+                <span>Made with ❤️ in India</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
