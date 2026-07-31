@@ -272,32 +272,54 @@
                 <h2>The Ultra Route</h2>
                 <p>Your road through Rajasthan</p>
             </div>
-            <div class="distance-tabs" id="routeTabs">
-                <button class="dist-tab active" data-route="legacy">⚔️ Legacy — 100K</button>
-                <button class="dist-tab" data-route="heritage">🏛️ Heritage — 50K</button>
-                <button class="dist-tab" data-route="origins">🏁 Origins — 30K</button>
+            <div class="route-layout">
+                <div class="route-map-col">
+                    <div class="route-map" id="routeMap"></div>
+                </div>
+                <div class="route-desc-col" id="routeDesc">
+                    <h3 id="routeDescTitle">Legacy — 100K</h3>
+                    <div class="route-desc-stats" id="routeDescStats">
+                        <div class="rds-item"><span class="rds-label">DISTANCE</span><span class="rds-val">100 KM</span></div>
+                        <div class="rds-item"><span class="rds-label">CUT-OFF</span><span class="rds-val">16 HRS</span></div>
+                        <div class="rds-item"><span class="rds-label">SURFACE</span><span class="rds-val">ROAD &amp; TRAIL</span></div>
+                        <div class="rds-item"><span class="rds-label">AID STATIONS</span><span class="rds-val">12</span></div>
+                    </div>
+                    <p class="route-desc-text" id="routeDescText">The ultimate test of endurance. Run from dawn to dusk across the full canvas of Shekhawati's timeless landscape — every kilometre a story, every stride a tribute.</p>
+                </div>
             </div>
-            <div class="route-map" id="routeMap"></div>
-            <div class="route-stats" id="routeStats"></div>
+            <div class="distance-tabs" id="routeTabs">
+                <button class="dist-tab" data-route="origins">🏁 30 KM</button>
+                <button class="dist-tab" data-route="heritage">🏛️ 50 KM</button>
+                <button class="dist-tab active" data-route="legacy">⚔️ 100 KM</button>
+            </div>
         </div>
     </section>
 
-    <!-- ========== RACE CATEGORIES ========== -->
-    <section class="categories" id="categories">
+    <!-- ========== COUNTDOWN ========== -->
+    <section class="countdown" id="countdown">
         <div class="section-header">
-            <span class="section-tag">Race Categories</span>
-            <h2>Who Will You Run For?</h2>
+            <span class="section-tag">Race Day Is Coming</span>
+            <h2>27 September 2026</h2>
         </div>
-        <div class="cat-grid">
-            <div class="cat-card" data-scroll>
-                <div class="cat-icon">🏃‍♂️</div>
-                <h3>Open Men</h3>
-                <p>Origins &bull; Heritage &bull; Legacy</p>
+        <div class="countdown-timer" id="countdownTimer">
+            <div class="cd-block">
+                <span class="cd-number" id="cd-days">00</span>
+                <span class="cd-label">Days</span>
             </div>
-            <div class="cat-card" data-scroll>
-                <div class="cat-icon">🏃‍♀️</div>
-                <h3>Open Women</h3>
-                <p>Origins &bull; Heritage &bull; Legacy</p>
+            <span class="cd-sep">:</span>
+            <div class="cd-block">
+                <span class="cd-number" id="cd-hours">00</span>
+                <span class="cd-label">Hours</span>
+            </div>
+            <span class="cd-sep">:</span>
+            <div class="cd-block">
+                <span class="cd-number" id="cd-mins">00</span>
+                <span class="cd-label">Minutes</span>
+            </div>
+            <span class="cd-sep">:</span>
+            <div class="cd-block">
+                <span class="cd-number" id="cd-secs">00</span>
+                <span class="cd-label">Seconds</span>
             </div>
         </div>
     </section>
@@ -355,7 +377,7 @@
             <h2>Run Through History</h2>
             <p>Spots are limited. Secure your place at the starting line.</p>
             <a href="https://konfhub.com/shekhawati-ultra" target="_blank" rel="noopener" class="btn-primary btn-large">
-                <span>Register on Konfhub</span>
+                <span>Register</span>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>

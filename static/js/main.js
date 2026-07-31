@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initDistanceTabs();
     initScrollReveal();
     initRouteMap();
+    initCountdown();
 });
 
 /* ---------- LOADER ---------- */
@@ -108,7 +109,6 @@ function initRouteMap() {
 
     addMJFMarker(map);
 
-    const statsEl = document.getElementById("routeStats");
     const tabs = document.querySelectorAll("#routeTabs .dist-tab");
 
     // Store loaded routes
@@ -155,13 +155,30 @@ function initRouteMap() {
             routes[key].addTo(map);
             const group = routes[key].getLayers();
             if (group.length) {
-                const poly = group[0]; // first layer is the main polyline
+                const poly = group[0];
                 map.fitBounds(poly.getBounds(), { padding: [30, 30] });
             }
         }
-        // Update stats
+        // Update description panel
         const cfg = config[key];
-        statsEl.innerHTML = `<span><span style="color:${cfg.color}">●</span> <strong>${cfg.label}</strong></span>`;
+        const descTitle = document.getElementById("routeDescTitle");
+        const descStats = document.getElementById("routeDescStats");
+        const descText = document.getElementById("routeDescText");
+        if (descTitle) descTitle.textContent = cfg.label;
+        if (descStats) {
+            descStats.innerHTML = `
+                <div class="rds-item"><span class="rds-label">DISTANCE</span><span class="rds-val">${cfg.label.split("—")[1]?.trim() || cfg.label}</span></div>
+                <div class="rds-item"><span class="rds-label">CUT-OFF</span><span class="rds-val">${cfg.cutOff}</span></div>
+                <div class="rds-item"><span class="rds-label">SURFACE</span><span class="rds-val">${cfg.surface}</span></div>
+                <div class="rds-item"><span class="rds-label">AID STATIONS</span><span class="rds-val">${cfg.aid}</span></div>
+            `;
+        }
+        const descs = {
+            legacy: "The ultimate test of endurance. Run from dawn to dusk across the full canvas of Shekhawati's timeless landscape — every kilometre a story, every stride a tribute.",
+            heritage: "The perfect middle distance. Challenging enough to demand respect, framed by Rajasthan's breathtaking painted havelis and heritage views.",
+            origins: "A fast, accessible introduction to ultramarathon running. Experience the soul of Shekhawati at a pace that lets you take it all in.",
+        };
+        if (descText) descText.textContent = descs[key] || "";
     }
 
     // Tab click handler
@@ -213,5 +230,30 @@ function addMJFMarker(map) {
     L.marker([27.8515, 75.268], { icon: mjfIcon })
         .addTo(map)
         .bindPopup("<strong>MJF Sports Ground</strong><br>Start &amp; Finish");
+}
+
+/* ---------- COUNTDOWN TIMER ---------- */
+function initCountdown() {
+    const raceDate = new Date("2026-09-27T06:00:00+05:30").getTime();
+    const daysEl = document.getElementById("cd-days");
+    const hoursEl = document.getElementById("cd-hours");
+    const minsEl = document.getElementById("cd-mins");
+    const secsEl = document.getElementById("cd-secs");
+    if (!daysEl) return;
+
+    function tick() {
+        const now = Date.now();
+        const diff = Math.max(0, raceDate - now);
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+        daysEl.textContent = String(days).padStart(2, "0");
+        hoursEl.textContent = String(hours).padStart(2, "0");
+        minsEl.textContent = String(mins).padStart(2, "0");
+        secsEl.textContent = String(secs).padStart(2, "0");
+        if (diff > 0) requestAnimationFrame(() => setTimeout(tick, 1000));
+    }
+    tick();
 }
 

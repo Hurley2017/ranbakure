@@ -529,34 +529,77 @@ section { padding: 100px 24px; position: relative; }
     100% { transform: scale(2); opacity: 0; }
 }
 
-@media (max-width: 768px) {
-    .route-map { height: 300px; }
+/* ========== COUNTDOWN ========== */
+.countdown { background: var(--black-soft); padding: 100px 24px; text-align: center; }
+.countdown-timer {
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px; flex-wrap: wrap;
+}
+.cd-block {
+    display: flex; flex-direction: column; align-items: center;
+    min-width: 90px;
+}
+.cd-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 900; color: var(--gold);
+    line-height: 1; font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 40px rgba(201,162,78,0.3);
+}
+.cd-label {
+    font-size: 0.7rem; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 3px;
+    margin-top: 6px;
+}
+.cd-sep {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; color: var(--text-dim);
+    font-weight: 300; margin-top: -16px;
 }
 
-/* ========== CATEGORIES ========== */
-.categories { background: var(--black-soft); }
-.cat-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 16px; max-width: 700px; margin: 0 auto;
+/* ========== ROUTE MAP LAYOUT ========== */
+.route-layout {
+    display: flex; gap: 20px; max-width: 1050px;
+    margin: 0 auto 16px; align-items: stretch;
 }
-.cat-card {
+.route-map-col { flex: 1.5; min-width: 0; }
+.route-desc-col {
+    flex: 1; min-width: 260px;
     background: var(--black-card);
     border: 1px solid var(--black-border);
     border-radius: var(--radius);
-    padding: 36px 28px; text-align: center;
-    opacity: 0; transform: translateY(30px);
+    padding: 28px 24px;
+    display: flex; flex-direction: column;
+    justify-content: center;
+    gap: 16px;
 }
-.cat-card.visible {
-    opacity: 1; transform: translateY(0);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+.route-desc-col h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; color: var(--white);
 }
-.cat-icon { font-size: 2.5rem; margin-bottom: 12px; }
-.cat-card h3 {
-    font-size: 1.2rem; color: var(--white); margin-bottom: 6px;
+.route-desc-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px;
 }
-.cat-card p { font-size: 0.88rem; color: var(--text-muted); }
+.rds-item { display: flex; flex-direction: column; gap: 2px; }
+.rds-label {
+    font-size: 0.62rem; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 2px;
+}
+.rds-val {
+    font-size: 0.88rem; color: var(--white);
+    font-weight: 600;
+}
+.route-desc-text {
+    font-size: 0.85rem; color: var(--text-muted);
+    line-height: 1.7;
+}
 
-/* ========== TRAVEL ========== */
+@media (max-width: 768px) {
+    .route-layout { flex-direction: column; }
+    .route-desc-col { min-width: 0; }
+    .route-map { height: 280px; }
+}
 .travel { background: var(--black); }
 .travel-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
