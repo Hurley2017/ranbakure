@@ -167,199 +167,94 @@ function initParticles() {
     animate();
 }
 
-/* ---------- ROUTE MAP (MapLibre GL) ---------- */
+/* ---------- ROUTE MAPS (Leaflet — Dual) ---------- */
 function initRouteMap() {
-    const mapEl = document.getElementById("routeMap");
-    if (!mapEl || typeof maplibregl === "undefined") { console.warn("MapLibre not loaded"); return; }
+    if (typeof L === "undefined") { console.warn("Leaflet not loaded"); return; }
 
-    // Inline dark style — reliable, no API key needed
-    const darkStyle = {
-        version: 8,
-        sources: {
-            "carto-dark": {
-                type: "raster",
-                tiles: ["https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-                        "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-                        "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"],
-                tileSize: 256,
-                attribution: '&copy; CARTO',
-            },
-        },
-        layers: [{
-            id: "carto-dark-layer",
-            type: "raster",
-            source: "carto-dark",
-            minzoom: 0,
-            maxzoom: 22,
-        }],
-    };
+    const tileUrl = "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
+    const tileOpts = { subdomains: "abcd", maxZoom: 19 };
 
-    const map = new maplibregl.Map({
-        container: "routeMap",
-        style: darkStyle,
-        center: [75.27, 27.85],
-        zoom: 12,
-        scrollZoom: false,
-        attributionControl: false,
-    });
+    // --- Legacy 100K (GPX) map ---
+    if (window.ROUTE_GPX_URL) {
+        const map100 = L.map("routeMap100", {
+            center: [27.85, 75.27], zoom: 12,
+            scrollWheelZoom: false, attributionControl: false,
+        });
+        L.tileLayer(tileUrl, tileOpts).addTo(map100);
+        addMJFMarker(map100);
 
-    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
-
-    const statsEl = document.getElementById("routeStats");
-    const statsData = [];
-    let bounds = new maplibregl.LngLatBounds();
-
-    // Wait for map to load before adding routes
-    map.on("load", () => {
-        // MJF marker
-        const mjfEl = document.createElement("div");
-        mjfEl.className = "mjf-marker";
-        mjfEl.innerHTML = '<div class="mjf-pulse"></div><div class="mjf-dot"></div>';
-        new maplibregl.Marker({ element: mjfEl, anchor: "center" })
-            .setLngLat([75.268, 27.8515])
-            .setPopup(new maplibregl.Popup({ offset: 16, closeButton: false })
-                .setHTML("<strong>MJF Sports Ground</strong><br>Start &amp; Finish"))
-            .addTo(map);
-        bounds.extend([75.268, 27.8515]);
-
-        // Load GPX
-        if (window.ROUTE_GPX_URL) {
-            fetch(window.ROUTE_GPX_URL)
-                .then(r => r.text())
-                .then(xml => {
-                    const doc = new DOMParser().parseFromString(xml, "application/xml");
-                    const pts = [];
-                    doc.querySelectorAll("trkpt").forEach(pt => {
-                        const lat = parseFloat(pt.getAttribute("lat"));
-                        const lon = parseFloat(pt.getAttribute("lon"));
-                        if (!isNaN(lat) && !isNaN(lon)) pts.push([lon, lat]);
-                    });
-                    console.log("GPX points:", pts.length);
-                    if (pts.length) {
-                        addGlowingRoute(map, pts, "#e8a838", "legacy-route");
-                        pts.forEach(p => bounds.extend(p));
-                        statsData.push({ label: "Legacy — 100K", dist: calcDistanceGeo(pts), color: "#e8a838" });
-                        updateStats();
-                        fitMap();
-                    }
-                }).catch(e => console.warn("GPX load failed:", e));
-        }
-
-        // Load KML
-        if (window.ROUTE_KML_URL) {
-            fetch(window.ROUTE_KML_URL)
-                .then(r => r.text())
-                .then(xml => {
-                    const doc = new DOMParser().parseFromString(xml, "application/xml");
-                    const coordsEl = doc.querySelector("coordinates");
-                    if (!coordsEl) { console.warn("No coordinates in KML"); return; }
-                    const raw = coordsEl.textContent.trim();
-                    const pts = [];
-                    raw.split(/\s+/).forEach(t => {
-                        const [lon, lat] = t.split(",").map(Number);
-                        if (!isNaN(lat) && !isNaN(lon)) pts.push([lon, lat]);
-                    });
-                    console.log("KML points:", pts.length);
-                    if (pts.length) {
-                        addGlowingRoute(map, pts, "#5b9ecf", "heritage-route");
-                        pts.forEach(p => bounds.extend(p));
-                        statsData.push({ label: "Heritage — 53K", dist: calcDistanceGeo(pts), color: "#5b9ecf" });
-                        updateStats();
-                        fitMap();
-                    }
-                }).catch(e => console.warn("KML load failed:", e));
-        }
-
-        // Fallback: fit if no routes load after 5s
-        setTimeout(fitMap, 5000);
-    });
-
-    function updateStats() {
-        if (statsEl && statsData.length) {
-            statsEl.innerHTML = statsData
-                .map(d => `<span><span style="color:${d.color}">●</span> <strong>${d.label}:</strong> ~${Math.round(d.dist)} km</span>`)
-                .join("");
-        }
+        fetch(window.ROUTE_GPX_URL)
+            .then(r => r.text())
+            .then(xml => {
+                const doc = new DOMParser().parseFromString(xml, "application/xml");
+                const pts = [];
+                doc.querySelectorAll("trkpt").forEach(pt => {
+                    const lat = parseFloat(pt.getAttribute("lat"));
+                    const lon = parseFloat(pt.getAttribute("lon"));
+                    if (!isNaN(lat) && !isNaN(lon)) pts.push([lat, lon]);
+                });
+                console.log("GPX route points:", pts.length);
+                if (pts.length) {
+                    // Bright visible line
+                    L.polyline(pts, {
+                        color: "#e8a838", weight: 5, opacity: 1,
+                    }).addTo(map100);
+                    // Inner white dashed overlay for contrast
+                    L.polyline(pts, {
+                        color: "#fff", weight: 1.5, opacity: 0.4,
+                        dashArray: "8, 12",
+                    }).addTo(map100);
+                    map100.fitBounds(L.latLngBounds(pts), { padding: [30, 30] });
+                }
+            }).catch(e => console.warn("GPX load failed:", e));
     }
 
-    function fitMap() {
-        if (!bounds.isEmpty()) {
-            map.fitBounds(bounds, { padding: 60, maxZoom: 13, duration: 2000 });
-        }
+    // --- Heritage 53K (KML) map ---
+    if (window.ROUTE_KML_URL) {
+        const map53 = L.map("routeMap53", {
+            center: [27.85, 75.27], zoom: 12,
+            scrollWheelZoom: false, attributionControl: false,
+        });
+        L.tileLayer(tileUrl, tileOpts).addTo(map53);
+        addMJFMarker(map53);
+
+        fetch(window.ROUTE_KML_URL)
+            .then(r => r.text())
+            .then(xml => {
+                const doc = new DOMParser().parseFromString(xml, "application/xml");
+                const coordsEl = doc.querySelector("coordinates");
+                if (!coordsEl) { console.warn("No <coordinates> in KML"); return; }
+                const raw = coordsEl.textContent.trim();
+                const pts = [];
+                raw.split(/\s+/).forEach(t => {
+                    const [lon, lat] = t.split(",").map(Number);
+                    if (!isNaN(lat) && !isNaN(lon)) pts.push([lat, lon]);
+                });
+                console.log("KML route points:", pts.length);
+                if (pts.length) {
+                    L.polyline(pts, {
+                        color: "#5b9ecf", weight: 5, opacity: 1,
+                    }).addTo(map53);
+                    L.polyline(pts, {
+                        color: "#fff", weight: 1.5, opacity: 0.4,
+                        dashArray: "8, 12",
+                    }).addTo(map53);
+                    map53.fitBounds(L.latLngBounds(pts), { padding: [30, 30] });
+                }
+            }).catch(e => console.warn("KML load failed:", e));
     }
 }
 
-/* Add a glowing route line (glow layer + core layer + animated dash) */
-function addGlowingRoute(map, coords, color, id) {
-    if (!map.loaded()) return;
-
-    map.addSource(`${id}-source`, {
-        type: "geojson",
-        data: { type: "Feature", geometry: { type: "LineString", coordinates: coords } },
+/* Add MJF Sports Ground marker to a Leaflet map */
+function addMJFMarker(map) {
+    const mjfIcon = L.divIcon({
+        className: "mjf-leaflet-marker",
+        html: '<div class="mjf-leaflet-dot"></div><div class="mjf-leaflet-ring"></div>',
+        iconSize: [20, 20],
+        iconAnchor: [10, 10],
     });
-
-    // Outer glow
-    map.addLayer({
-        id: `${id}-glow`,
-        type: "line",
-        source: `${id}-source`,
-        paint: {
-            "line-color": color,
-            "line-width": 8,
-            "line-opacity": 0.2,
-            "line-blur": 4,
-        },
-    });
-
-    // Core line
-    map.addLayer({
-        id: `${id}-core`,
-        type: "line",
-        source: `${id}-source`,
-        paint: {
-            "line-color": color,
-            "line-width": 3,
-            "line-opacity": 0.9,
-        },
-    });
-
-    // Animated dash overlay
-    map.addLayer({
-        id: `${id}-dash`,
-        type: "line",
-        source: `${id}-source`,
-        paint: {
-            "line-color": "#fff",
-            "line-width": 2,
-            "line-opacity": 0.5,
-            "line-dasharray": [0, 4, 2],
-        },
-    });
-
-    // Animate the dash
-    let dashOffset = 0;
-    function animateDash() {
-        dashOffset = (dashOffset + 0.3) % 100;
-        if (map.getLayer(`${id}-dash`)) {
-            map.setPaintProperty(`${id}-dash`, "line-dasharray", [dashOffset % 8, 4, 2, 4]);
-        }
-        requestAnimationFrame(animateDash);
-    }
-    animateDash();
-}
-
-/* Haversine distance (coords are [lon, lat] arrays from MapLibre) */
-function calcDistanceGeo(pts) {
-    const R = 6371;
-    let d = 0;
-    for (let i = 1; i < pts.length; i++) {
-        const [lon1, lat1] = pts[i - 1];
-        const [lon2, lat2] = pts[i];
-        const dLat = (lat2 - lat1) * Math.PI / 180;
-        const dLon = (lon2 - lon1) * Math.PI / 180;
-        const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
-        d += R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    }
-    return d;
+    L.marker([27.8515, 75.268], { icon: mjfIcon })
+        .addTo(map)
+        .bindPopup("<strong>MJF Sports Ground</strong><br>Start &amp; Finish");
 }
 
