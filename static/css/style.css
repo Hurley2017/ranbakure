@@ -20,6 +20,16 @@
     --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ---------- Almaq Rough Font (drop .woff2 in static/fonts/) ---------- */
+@font-face {
+    font-family: 'Almaq Rough';
+    src: url('../fonts/Almaq-Rough.woff2') format('woff2'),
+         url('../fonts/Almaq-Rough.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* ---------- RESET ---------- */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -167,28 +177,14 @@ body {
 }
 
 .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(3.5rem, 9vw, 7rem);
-    line-height: 1.05; margin-bottom: 20px;
-}
-.title-line {
-    display: block;
-    background: linear-gradient(135deg, #fff 0%, #aaa 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-family: 'Almaq Rough', 'Playfair Display', serif;
+    font-size: clamp(3.2rem, 8vw, 6rem);
+    line-height: 1.15; margin-bottom: 28px;
+    color: var(--white);
+    letter-spacing: 2px;
 }
 .title-line.accent {
-    background: linear-gradient(135deg, var(--gold) 0%, #e8c86a 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.hero-subtitle {
-    font-size: 1.05rem; color: var(--text-muted);
-    max-width: 580px; margin: 0 auto 36px;
-    line-height: 1.8;
+    color: var(--gold);
 }
 
 /* CTA Buttons */
@@ -232,18 +228,6 @@ body {
 .btn-secondary:hover {
     border-color: var(--gold);
     background: rgba(201,162,78,0.06);
-}
-
-/* Hero distance badges */
-.hero-distances {
-    display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
-}
-.dist-badge {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 6px 16px; border-radius: 4px;
-    font-size: 0.78rem; color: var(--text-muted);
-    letter-spacing: 0.5px;
 }
 
 /* Scroll indicator */
@@ -540,7 +524,7 @@ section { padding: 100px 24px; position: relative; }
     min-width: 90px;
 }
 .cd-number {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Almaq Rough', 'Playfair Display', serif;
     font-size: clamp(3rem, 8vw, 5rem);
     font-weight: 900; color: var(--gold);
     line-height: 1; font-variant-numeric: tabular-nums;
@@ -761,8 +745,6 @@ footer {
     .nav-toggle { display: flex; }
 
     .hero-title { font-size: 2.8rem; }
-    .hero-distances { gap: 8px; }
-    .dist-badge { font-size: 0.7rem; padding: 4px 10px; }
 
     .about-lead { font-size: 1.3rem; }
     .info-grid { grid-template-columns: 1fr; }
