@@ -7,7 +7,7 @@
     <meta name="description" content="Shekhawati Ultra — A road ultramarathon through Rajasthan's painted havelis, timeless architecture, and vibrant countryside. Origins 30K, Heritage 50K, Legacy 100K. 27 September 2026.">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon/Untitled-1.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;900&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
@@ -23,7 +23,6 @@
     <nav class="navbar" id="navbar">
         <div class="nav-brand">
             <img src="{{ url_for('static', filename='icon/Untitled-1.png') }}" alt="Ranbakure" class="brand-logo">
-            <span class="brand-text">Ranbakure</span>
         </div>
         <div class="nav-links" id="navLinks">
             <a href="#home">Home</a>
@@ -375,6 +374,31 @@
                 <a href="https://www.instagram.com/ranbakure_?utm_source=qr" target="_blank" rel="noopener" class="social-link">
                     <span>📸</span> Follow @ranbakure_
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PHOTO GALLERY ========== -->
+    <section class="gallery" id="gallery">
+        <div class="section-header">
+            <span class="section-tag">The Grit in Motion</span>
+            <h2>Race Day Moments</h2>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item gallery-large">
+                <img src="{{ url_for('static', filename='imges/IMG_0541.JPG.jpeg') }}" alt="Runner" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="{{ url_for('static', filename='imges/IMG_0543.JPG.jpeg') }}" alt="Runner" loading="lazy">
+            </div>
+            <div class="gallery-item gallery-tall">
+                <img src="{{ url_for('static', filename='imges/IMG_0544.JPG.jpeg') }}" alt="Runner" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="{{ url_for('static', filename='imges/SRI_1791.JPG.jpeg') }}" alt="Start line" loading="lazy">
+            </div>
+            <div class="gallery-item gallery-wide">
+                <img src="{{ url_for('static', filename='imges/Sequence 010005.jpg.jpeg') }}" alt="Race moment" loading="lazy">
             </div>
         </div>
     </section>
