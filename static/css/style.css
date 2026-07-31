@@ -132,13 +132,14 @@ body {
 /* YouTube video background */
 .video-bg {
     position: absolute; inset: 0; z-index: 0;
-    pointer-events: none;
+    pointer-events: none; overflow: hidden;
 }
 .video-bg iframe {
     position: absolute; top: 50%; left: 50%;
     width: 100vw; height: 56.25vw;
     min-height: 100vh; min-width: 177.77vh;
     transform: translate(-50%, -50%);
+    pointer-events: none;
 }
 .video-overlay {
     position: absolute; inset: 0; z-index: 1;
@@ -150,7 +151,7 @@ body {
     position: relative; z-index: 3;
     display: flex; flex-direction: column;
     align-items: center;
-    padding-top: 33vh;
+    padding-top: 22vh;
     text-align: center; max-width: 860px;
     padding-left: 24px; padding-right: 24px;
     padding-bottom: 80px;
