@@ -1,14 +1,15 @@
 /**
- * INDIA MARATHON — Main JavaScript
- * Particle canvas, scroll animations, counters, and interactions.
+ * RANBAKURE — Shekhawati Ultra
+ * YouTube background, distance tabs, scroll reveals, particles, mobile nav.
  */
 
 document.addEventListener("DOMContentLoaded", () => {
     initLoader();
-    initParticles();
     initNavbar();
+    initMobileNav();
+    initDistanceTabs();
     initScrollReveal();
-    initCounters();
+    initParticles();
 });
 
 /* ---------- LOADER ---------- */
@@ -20,19 +21,79 @@ function initLoader() {
         hidden = true;
         setTimeout(() => loader.classList.add("hidden"), 400);
     };
-    // Hide when DOM is ready (don't wait for fonts/images)
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", hide);
     } else {
         hide();
     }
-    // Also try on full load as backup
     window.addEventListener("load", hide);
-    // Hard fallback after 3 seconds
     setTimeout(hide, 3000);
 }
 
-/* ---------- PARTICLE CANVAS ---------- */
+/* ---------- NAVBAR ---------- */
+function initNavbar() {
+    const navbar = document.getElementById("navbar");
+    window.addEventListener("scroll", () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 50);
+    });
+}
+
+/* ---------- MOBILE NAV ---------- */
+function initMobileNav() {
+    const toggle = document.getElementById("navToggle");
+    const links = document.getElementById("navLinks");
+    if (!toggle || !links) return;
+
+    toggle.addEventListener("click", () => {
+        links.classList.toggle("open");
+    });
+
+    // Close on link click
+    links.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+            links.classList.remove("open");
+        });
+    });
+
+    // Close on click outside
+    document.addEventListener("click", (e) => {
+        if (!toggle.contains(e.target) && !links.contains(e.target)) {
+            links.classList.remove("open");
+        }
+    });
+}
+
+/* ---------- DISTANCE TABS ---------- */
+function initDistanceTabs() {
+    const tabs = document.querySelectorAll(".dist-tab");
+    const panels = document.querySelectorAll(".dist-panel");
+
+    tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+            const dist = tab.dataset.dist;
+            tabs.forEach(t => t.classList.remove("active"));
+            panels.forEach(p => p.classList.remove("active"));
+            tab.classList.add("active");
+            const panel = document.querySelector(`.dist-panel[data-panel="${dist}"]`);
+            if (panel) panel.classList.add("active");
+        });
+    });
+}
+
+/* ---------- SCROLL REVEAL ---------- */
+function initScrollReveal() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, { threshold: 0.12, rootMargin: "0px 0px -30px 0px" });
+
+    document.querySelectorAll("[data-scroll]").forEach(el => observer.observe(el));
+}
+
+/* ---------- PARTICLES ---------- */
 function initParticles() {
     const canvas = document.getElementById("particleCanvas");
     if (!canvas) return;
@@ -40,13 +101,7 @@ function initParticles() {
 
     let width, height;
     const particles = [];
-    const particleCount = 80;
-    const colors = [
-        "rgba(255,153,51,0.6)",  // saffron
-        "rgba(255,255,255,0.4)",  // white
-        "rgba(19,136,8,0.6)",     // green
-        "rgba(255,215,0,0.5)",    // gold
-    ];
+    const count = 50;
 
     function resize() {
         width = canvas.width = window.innerWidth;
@@ -62,11 +117,10 @@ function initParticles() {
         reset() {
             this.x = Math.random() * width;
             this.y = Math.random() * height;
-            this.size = Math.random() * 3 + 1;
-            this.speedX = (Math.random() - 0.5) * 0.6;
-            this.speedY = (Math.random() - 0.5) * 0.6;
-            this.color = colors[Math.floor(Math.random() * colors.length)];
-            this.opacity = Math.random() * 0.7 + 0.3;
+            this.size = Math.random() * 1.8 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.4;
+            this.speedY = (Math.random() - 0.5) * 0.4;
+            this.opacity = Math.random() * 0.5 + 0.15;
         }
         update() {
             this.x += this.speedX;
@@ -78,110 +132,36 @@ function initParticles() {
         draw(ctx) {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = this.color;
-            ctx.globalAlpha = this.opacity;
+            ctx.fillStyle = `rgba(201,162,78,${this.opacity})`;
             ctx.fill();
-            ctx.globalAlpha = 1;
         }
     }
 
-    for (let i = 0; i < particleCount; i++) {
+    for (let i = 0; i < count; i++) {
         particles.push(new Particle());
-    }
-
-    // Connect nearby particles
-    function drawConnections(ctx) {
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 120) {
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(255,255,255,${0.04 * (1 - dist / 120)})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.stroke();
-                }
-            }
-        }
     }
 
     function animate() {
         ctx.clearRect(0, 0, width, height);
         particles.forEach(p => { p.update(); p.draw(ctx); });
-        drawConnections(ctx);
+
+        // Connect nearby
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 100) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(201,162,78,${0.03 * (1 - dist / 100)})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
         requestAnimationFrame(animate);
     }
     animate();
-}
-
-/* ---------- NAVBAR SCROLL EFFECT ---------- */
-function initNavbar() {
-    const navbar = document.getElementById("navbar");
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add("scrolled");
-        } else {
-            navbar.classList.remove("scrolled");
-        }
-    });
-}
-
-/* ---------- SCROLL REVEAL ---------- */
-function initScrollReveal() {
-    const observerOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px",
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll("[data-scroll]").forEach(el => observer.observe(el));
-}
-
-/* ---------- COUNTER ANIMATION ---------- */
-function initCounters() {
-    const counters = document.querySelectorAll(".stat-number[data-count]");
-    let animated = false;
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !animated) {
-                animated = true;
-                counters.forEach(counter => animateCounter(counter));
-            }
-        });
-    }, { threshold: 0.5 });
-
-    const statsSection = document.querySelector(".hero-stats");
-    if (statsSection) observer.observe(statsSection);
-}
-
-function animateCounter(el) {
-    const target = parseInt(el.getAttribute("data-count"), 10);
-    const duration = 2000;
-    const startTime = performance.now();
-
-    function update(now) {
-        const elapsed = now - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        // Ease out cubic
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const current = Math.floor(eased * target);
-        el.textContent = current.toLocaleString();
-        if (progress < 1) {
-            requestAnimationFrame(update);
-        } else {
-            el.textContent = target.toLocaleString();
-        }
-    }
-    requestAnimationFrame(update);
 }

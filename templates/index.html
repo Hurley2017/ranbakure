@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ranbakure — Shekhawati Ultra Marathon</title>
+    <meta name="description" content="Shekhawati Ultra — A road ultramarathon through Rajasthan's painted havelis, timeless architecture, and vibrant countryside. Origins 30K, Heritage 53K, Legacy 100K. 27 September 2026.">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon/Untitled-1.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
@@ -14,194 +15,280 @@
     <!-- ========== LOADER ========== -->
     <div class="loader" id="loader">
         <div class="loader-ring"></div>
-        <span>Loading the spirit of India…</span>
+        <span>Ranbakure</span>
     </div>
 
     <!-- ========== NAV ========== -->
     <nav class="navbar" id="navbar">
         <div class="nav-brand">
-            <img src="{{ url_for('static', filename='icon/Untitled-1.png') }}" alt="Logo" class="brand-logo">
+            <img src="{{ url_for('static', filename='icon/Untitled-1.png') }}" alt="Ranbakure" class="brand-logo">
             <span class="brand-text">Ranbakure</span>
         </div>
-        <div class="nav-links">
+        <div class="nav-links" id="navLinks">
             <a href="#home">Home</a>
             <a href="#about">About</a>
-            <a href="#route">Route</a>
+            <a href="#race-info">Race Info</a>
+            <a href="#categories">Categories</a>
+            <a href="#travel">Travel</a>
             <a href="#register" class="nav-cta">Register</a>
         </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
 
     <!-- ========== HERO SECTION ========== -->
     <section class="hero" id="home">
-        <!-- Animated background layers -->
-        <div class="hero-bg">
-            <div class="tricolor-stripe stripe-saffron"></div>
-            <div class="tricolor-stripe stripe-white"></div>
-            <div class="tricolor-stripe stripe-green"></div>
+        <div class="video-bg">
+            <div class="video-overlay"></div>
+            <iframe
+                id="ytPlayer"
+                src="https://www.youtube.com/embed/Q4pgrjer_T0?autoplay=1&mute=1&controls=0&loop=1&playlist=Q4pgrjer_T0&playsinline=1&rel=0&showinfo=0&modestbranding=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+            ></iframe>
         </div>
 
-        <!-- Floating particles -->
         <canvas id="particleCanvas"></canvas>
 
-        <!-- Ashoka Chakra in background -->
-        <div class="ashoka-chakra-bg">
-            <svg viewBox="0 0 200 200" class="chakra-svg">
-                <circle cx="100" cy="100" r="95" fill="none" stroke="rgba(0,56,168,0.08)" stroke-width="2"/>
-                <circle cx="100" cy="100" r="75" fill="none" stroke="rgba(0,56,168,0.06)" stroke-width="1"/>
-                <circle cx="100" cy="100" r="2" fill="rgba(0,56,168,0.15)"/>
-                {% for i in range(24) %}
-                <line x1="100" y1="100" x2="100" y2="25" stroke="rgba(0,56,168,0.1)" stroke-width="1.5"
-                      transform="rotate({{ i * 15 }}, 100, 100)"/>
-                {% endfor %}
-            </svg>
-        </div>
-
-        <!-- Running silhouettes layer -->
-        <div class="runners-track" id="runnersTrack">
-            <div class="runner runner-1">🏃‍♂️</div>
-            <div class="runner runner-2">🏃‍♀️</div>
-            <div class="runner runner-3">🏃</div>
-            <div class="runner runner-4">🏃‍♂️</div>
-            <div class="runner runner-5">🏃‍♀️</div>
-        </div>
-
-        <!-- Hero content -->
         <div class="hero-content">
             <div class="hero-badge">
-                <span class="badge-dot"></span> Presented by Ranbakure
+                <span class="badge-dot"></span> 27 September 2026 &bull; Nawalgarh, Rajasthan
             </div>
             <h1 class="hero-title">
-                <span class="title-line">Run Through</span>
-                <span class="title-line accent">Incredible India</span>
+                <span class="title-line">Shekhawati</span>
+                <span class="title-line accent">Ultra</span>
             </h1>
             <p class="hero-subtitle">
-                Join thousands of runners from across the globe. Experience the vibrant culture,
-                heritage, and spirit of India — one stride at a time.
+                Run through Rajasthan's painted havelis, timeless landscapes,<br>and centuries of heritage. Every kilometre tells a story.
             </p>
             <div class="hero-cta-group">
                 <a href="https://konfhub.com/shekhawati-ultra" target="_blank" rel="noopener" class="btn-primary">
-                    <span>Register on Konfhub</span>
+                    <span>Register Now</span>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
                 </a>
-                <a href="#about" class="btn-secondary">Learn More</a>
+                <a href="#about" class="btn-secondary">Discover the Race</a>
             </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number" data-count="42000">0</span>
-                    <span class="stat-label">Runners</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number" data-count="42">0</span>
-                    <span class="stat-label">Kilometers</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number" data-count="28">0</span>
-                    <span class="stat-label">States Represented</span>
-                </div>
+            <div class="hero-distances">
+                <span class="dist-badge">🏁 Origins — 30K</span>
+                <span class="dist-badge">🏛️ Heritage — 53K</span>
+                <span class="dist-badge">⚔️ Legacy — 100K</span>
             </div>
         </div>
 
-        <!-- Scroll indicator -->
         <div class="scroll-indicator">
-            <span>Scroll to explore</span>
-            <div class="scroll-mouse">
-                <div class="scroll-dot"></div>
-            </div>
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
         </div>
     </section>
 
-    <!-- ========== ABOUT / CULTURE SECTION ========== -->
+    <!-- ========== ABOUT SHEKHAWATI ULTRA ========== -->
     <section class="about" id="about">
-        <div class="about-bg-pattern"></div>
         <div class="section-header">
-            <span class="section-tag">The Spirit of India</span>
-            <h2>A Marathon Like No Other</h2>
-            <p>Run past ancient forts, through bustling bazaars, alongside serene rivers — every kilometer tells a story.</p>
+            <span class="section-tag">About Shekhawati Ultra</span>
+        </div>
+        <div class="about-content">
+            <p class="about-lead">
+                Some races take you to the finish line.<br>
+                <strong>Shekhawati Ultra takes you through a story.</strong>
+            </p>
+            <p>Created by Ranbakure, Shekhawati Ultra is a road ultramarathon that celebrates the soul of a place through the language of running.</p>
+            <p>The roads of Shekhawati have carried merchants, artists, travellers, and generations of communities that shaped one of India's richest cultural landscapes. They have witnessed centuries of craftsmanship, resilience, and tradition. On race day, they will welcome runners from around the world to become part of that continuing story.</p>
+            <p>Every turn reveals something worth remembering — painted havelis, timeless architecture, vibrant local life, and the quiet beauty of Rajasthan's countryside. This is not a course designed simply to measure distance; it is a journey designed to create connection.</p>
+            <p>Whether you choose <strong>Origins (30K)</strong>, <strong>Heritage (53K)</strong>, or <strong>Legacy (100K)</strong>, every kilometre invites you to experience Shekhawati with curiosity, respect, and purpose.</p>
+            <p class="about-closing">At Ranbakure, we don't begin with a route. We begin with a place. We listen to its stories, learn from its people, and only then create the race.</p>
+            <p class="about-closing"><em>Because every race is our tribute to the place.</em></p>
+        </div>
+    </section>
+
+    <!-- ========== RACE INFORMATION ========== -->
+    <section class="race-info" id="race-info">
+        <div class="section-header">
+            <span class="section-tag">Race Information</span>
+            <h2>Shekhawati Ultra 2026</h2>
         </div>
 
-        <div class="culture-cards">
-            <div class="culture-card" data-scroll>
-                <div class="card-icon">🕌</div>
-                <h3>Heritage Route</h3>
-                <p>Run through UNESCO World Heritage sites and centuries-old architecture that defines India's soul.</p>
+        <div class="info-grid">
+            <div class="info-card" data-scroll>
+                <div class="info-icon">📅</div>
+                <h3>Date</h3>
+                <p>27 September 2026</p>
             </div>
-            <div class="culture-card" data-scroll>
-                <div class="card-icon">🎭</div>
-                <h3>Cultural Extravaganza</h3>
-                <p>Experience live folk dances, music, and art from every corner of India along the route.</p>
+            <div class="info-card" data-scroll>
+                <div class="info-icon">📍</div>
+                <h3>Venue</h3>
+                <p>MJF Sports Ground, Nawalgarh, Rajasthan</p>
             </div>
-            <div class="culture-card" data-scroll>
-                <div class="card-icon">🍛</div>
-                <h3>Flavors of India</h3>
-                <p>Refuel with authentic regional cuisines at every aid station — from idlis to kebabs.</p>
+            <div class="info-card" data-scroll>
+                <div class="info-icon">🏁</div>
+                <h3>Start &amp; Finish</h3>
+                <p>MJF Sports Ground</p>
+            </div>
+            <div class="info-card" data-scroll>
+                <div class="info-icon">🛤️</div>
+                <h3>Course Terrain</h3>
+                <p>Road &amp; Trail Mix — smooth roads with scenic trail sections through Shekhawati</p>
+            </div>
+        </div>
+
+        <!-- Distance Tabs -->
+        <div class="distance-tabs" id="distanceTabs">
+            <button class="dist-tab active" data-dist="30">🏁 Origins — 30 KM</button>
+            <button class="dist-tab" data-dist="53">🏛️ Heritage — 53 KM</button>
+            <button class="dist-tab" data-dist="100">⚔️ Legacy — 100 KM</button>
+        </div>
+
+        <div class="distance-panels">
+            <div class="dist-panel active" data-panel="30">
+                <div class="dist-detail">
+                    <span class="dist-label">Cut-off Time</span>
+                    <span class="dist-value">4 Hours</span>
+                </div>
+                <p class="dist-desc">A fast, accessible introduction to ultramarathon running through the heart of Shekhawati.</p>
+            </div>
+            <div class="dist-panel" data-panel="53">
+                <div class="dist-detail">
+                    <span class="dist-label">Cut-off Time</span>
+                    <span class="dist-value">8 Hours</span>
+                </div>
+                <p class="dist-desc">The perfect middle distance — challenging enough to demand respect, framed by breathtaking heritage views.</p>
+            </div>
+            <div class="dist-panel" data-panel="100">
+                <div class="dist-detail">
+                    <span class="dist-label">Cut-off Time</span>
+                    <span class="dist-value">16 Hours</span>
+                </div>
+                <p class="dist-desc">The ultimate test. Run from dawn to dusk across the full canvas of Shekhawati's timeless landscape.</p>
+            </div>
+        </div>
+
+        <!-- Support -->
+        <div class="support-section">
+            <div class="section-header">
+                <h2>Hydration &amp; Medical Support</h2>
+            </div>
+            <div class="support-grid">
+                <div class="support-card" data-scroll>
+                    <div class="support-icon">💧</div>
+                    <h3>12 Hydration Stations</h3>
+                    <p>Positioned across the course providing water, electrolytes, fresh fruits, energy snacks, and basic medical assistance.</p>
+                </div>
+                <div class="support-card" data-scroll>
+                    <div class="support-icon">🩺</div>
+                    <h3>Medical Support</h3>
+                    <p>Ambulance support, medical team, first aid stations, and emergency response team throughout the race.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Route Downloads -->
+        <div class="route-downloads" data-scroll>
+            <div class="section-header">
+                <h2>Route Maps</h2>
+                <p>Download official GPX and KML route files</p>
+            </div>
+            <div class="route-buttons">
+                <a href="{{ url_for('static', filename='Routes/Routes-SHEKHAWATI_100K20260717164107.gpx') }}" class="btn-route" download>
+                    <span class="route-icon">🗺️</span>
+                    <span>100K Route</span>
+                    <span class="route-format">.GPX</span>
+                </a>
+                <a href="{{ url_for('static', filename='Routes/Routes-SHEKHWATI_ULTRA_55k_Route20260718132805.kml') }}" class="btn-route" download>
+                    <span class="route-icon">📍</span>
+                    <span>53K Route</span>
+                    <span class="route-format">.KML</span>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- ========== ROUTE SECTION ========== -->
-    <section class="route" id="route">
+    <!-- ========== RACE CATEGORIES ========== -->
+    <section class="categories" id="categories">
         <div class="section-header">
-            <span class="section-tag">The Journey</span>
-            <h2>Race Day Experience</h2>
+            <span class="section-tag">Race Categories</span>
+            <h2>Who Will You Run For?</h2>
         </div>
-
-        <div class="timeline">
-            <div class="timeline-item" data-scroll>
-                <div class="timeline-marker">
-                    <span class="marker-num">5K</span>
-                </div>
-                <div class="timeline-content">
-                    <h3>Sunrise Start</h3>
-                    <p>The tricolor flag waves as you begin your journey at dawn, with the aroma of marigolds in the air.</p>
-                </div>
+        <div class="cat-grid">
+            <div class="cat-card" data-scroll>
+                <div class="cat-icon">🏃‍♂️</div>
+                <h3>Open Men</h3>
+                <p>Origins &bull; Heritage &bull; Legacy</p>
             </div>
-            <div class="timeline-item" data-scroll>
-                <div class="timeline-marker">
-                    <span class="marker-num">21K</span>
-                </div>
-                <div class="timeline-content">
-                    <h3>Halfway Mark</h3>
-                    <p>Dhol beats and cheering crowds push you through the halfway point. The energy is electric.</p>
-                </div>
-            </div>
-            <div class="timeline-item" data-scroll>
-                <div class="timeline-marker">
-                    <span class="marker-num">35K</span>
-                </div>
-                <div class="timeline-content">
-                    <h3>The Push</h3>
-                    <p>The iconic India Gate looms ahead. Find your second wind as the city cheers your name.</p>
-                </div>
-            </div>
-            <div class="timeline-item" data-scroll>
-                <div class="timeline-marker finish">
-                    <span class="marker-num">42K</span>
-                </div>
-                <div class="timeline-content">
-                    <h3>Finish Line Glory</h3>
-                    <p>Cross the finish line to a crescendo of celebrations. You didn't just run — you became part of India's story.</p>
-                </div>
+            <div class="cat-card" data-scroll>
+                <div class="cat-icon">🏃‍♀️</div>
+                <h3>Open Women</h3>
+                <p>Origins &bull; Heritage &bull; Legacy</p>
             </div>
         </div>
     </section>
 
-    <!-- ========== CTA / REGISTER SECTION ========== -->
+    <!-- ========== TRAVEL INFORMATION ========== -->
+    <section class="travel" id="travel">
+        <div class="section-header">
+            <span class="section-tag">Travel Information</span>
+            <h2>Getting to Nawalgarh</h2>
+        </div>
+        <div class="travel-grid">
+            <div class="travel-card" data-scroll>
+                <div class="travel-icon">✈️</div>
+                <h3>Nearest Airports</h3>
+                <ul>
+                    <li><strong>Jaipur (JAI)</strong> — ~170 km</li>
+                    <li><strong>New Delhi (IGI)</strong> — ~250 km</li>
+                </ul>
+            </div>
+            <div class="travel-card" data-scroll>
+                <div class="travel-icon">🚆</div>
+                <h3>Nearest Railway</h3>
+                <p><strong>Sikar Junction</strong> — ~40 km from venue</p>
+            </div>
+            <div class="travel-card" data-scroll>
+                <div class="travel-icon">🚗</div>
+                <h3>By Road</h3>
+                <p>Approximately <strong>4 hours</strong> from Delhi</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== WHAT YOU'LL RECEIVE ========== -->
+    <section class="perks" id="perks">
+        <div class="section-header">
+            <span class="section-tag">Race Kit</span>
+            <h2>What You'll Receive</h2>
+        </div>
+        <div class="perks-grid">
+            <div class="perk-item" data-scroll><span class="perk-check">✓</span> Official Race Bib</div>
+            <div class="perk-item" data-scroll><span class="perk-check">✓</span> Official Event T-shirt</div>
+            <div class="perk-item" data-scroll><span class="perk-check">✓</span> Finisher Medal</div>
+            <div class="perk-item" data-scroll><span class="perk-check">✓</span> Digital Finisher Certificate</div>
+            <div class="perk-item" data-scroll><span class="perk-check">✓</span> RFID Chip Timing</div>
+            <div class="perk-item" data-scroll><span class="perk-check">✓</span> Hydration &amp; Nutrition</div>
+            <div class="perk-item" data-scroll><span class="perk-check">✓</span> Medical Support</div>
+            <div class="perk-item" data-scroll><span class="perk-check">✓</span> Race Photography</div>
+            <div class="perk-item" data-scroll><span class="perk-check">✓</span> Finish Line Refreshments</div>
+        </div>
+    </section>
+
+    <!-- ========== REGISTER CTA ========== -->
     <section class="register" id="register">
-        <!-- Floating rangoli pattern -->
-        <div class="rangoli-bg"></div>
-
         <div class="register-content">
-            <h2>Ready to Make History?</h2>
-            <p>Spots are filling fast. Secure your place at the starting line today.</p>
-            <a href="https://konfhub.com/shekhawati-ultra" target="_blank" rel="noopener" class="btn-primary btn-large pulse-animation">
+            <h2>Run Through History</h2>
+            <p>Spots are limited. Secure your place at the starting line.</p>
+            <a href="https://konfhub.com/shekhawati-ultra" target="_blank" rel="noopener" class="btn-primary btn-large">
                 <span>Register on Konfhub</span>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
             </a>
-            <p class="register-note">Registration powered by Konfhub • Secure & hassle-free</p>
+            <p class="register-note">Registration powered by Konfhub</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/ranbakure_?utm_source=qr" target="_blank" rel="noopener" class="social-link">
+                    <span>📸</span> Follow @ranbakure_
+                </a>
+            </div>
         </div>
     </section>
 
@@ -209,13 +296,15 @@
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
-                <img src="{{ url_for('static', filename='icon/Untitled-1.png') }}" alt="Logo" class="brand-logo">
+                <img src="{{ url_for('static', filename='icon/Untitled-1.png') }}" alt="Ranbakure" class="brand-logo">
                 <span>Ranbakure</span>
             </div>
-            <p class="footer-tagline">One race. One nation. One spirit.</p>
+            <p class="footer-tagline">Every race is our tribute to the place.</p>
+            <div class="footer-social">
+                <a href="https://www.instagram.com/ranbakure_?utm_source=qr" target="_blank" rel="noopener">📸 Instagram</a>
+            </div>
             <div class="footer-bottom">
                 <span>&copy; 2026 Ranbakure. All rights reserved.</span>
-                <span>Made with ❤️ in India</span>
             </div>
         </div>
     </footer>
