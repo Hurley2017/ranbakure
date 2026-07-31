@@ -20,11 +20,10 @@
     --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ---------- Almaq Rough Font (drop .woff2 in static/fonts/) ---------- */
+/* ---------- Almaq Rough Font ---------- */
 @font-face {
     font-family: 'Almaq Rough';
-    src: url('../fonts/Almaq-Rough.woff2') format('woff2'),
-         url('../fonts/Almaq-Rough.woff') format('woff');
+    src: url('../fonts/Almaq Rough.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -190,7 +189,7 @@ body {
 /* CTA Buttons */
 .hero-cta-group {
     display: flex; align-items: center; justify-content: center;
-    gap: 14px; flex-wrap: wrap; margin-bottom: 40px;
+    gap: 14px; flex-wrap: wrap; margin-top: 36px;
 }
 
 .btn-primary {
