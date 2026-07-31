@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initMobileNav();
     initDistanceTabs();
     initScrollReveal();
-    initParticles();
     initRouteMap();
 });
 
@@ -94,79 +93,6 @@ function initScrollReveal() {
     document.querySelectorAll("[data-scroll]").forEach(el => observer.observe(el));
 }
 
-/* ---------- PARTICLES ---------- */
-function initParticles() {
-    const canvas = document.getElementById("particleCanvas");
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-
-    let width, height;
-    const particles = [];
-    const count = 50;
-
-    function resize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener("resize", resize);
-
-    class Particle {
-        constructor() {
-            this.reset();
-        }
-        reset() {
-            this.x = Math.random() * width;
-            this.y = Math.random() * height;
-            this.size = Math.random() * 1.8 + 0.5;
-            this.speedX = (Math.random() - 0.5) * 0.4;
-            this.speedY = (Math.random() - 0.5) * 0.4;
-            this.opacity = Math.random() * 0.5 + 0.15;
-        }
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            if (this.x < -10 || this.x > width + 10 || this.y < -10 || this.y > height + 10) {
-                this.reset();
-            }
-        }
-        draw(ctx) {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(201,162,78,${this.opacity})`;
-            ctx.fill();
-        }
-    }
-
-    for (let i = 0; i < count; i++) {
-        particles.push(new Particle());
-    }
-
-    function animate() {
-        ctx.clearRect(0, 0, width, height);
-        particles.forEach(p => { p.update(); p.draw(ctx); });
-
-        // Connect nearby
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 100) {
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(201,162,78,${0.03 * (1 - dist / 100)})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.stroke();
-                }
-            }
-        }
-        requestAnimationFrame(animate);
-    }
-    animate();
-}
-
 /* ---------- ROUTE MAP (Leaflet — Tabbed single map) ---------- */
 function initRouteMap() {
     if (typeof L === "undefined") { console.warn("Leaflet not loaded"); return; }
@@ -191,9 +117,9 @@ function initRouteMap() {
 
     // Color config
     const config = {
-        legacy:  { color: "#e8a838", label: "Legacy — 100K", url: window.ROUTE_GPX_URL, parser: "gpx" },
-        heritage:{ color: "#5b9ecf", label: "Heritage — 53K", url: window.ROUTE_KML_URL, parser: "kml" },
-        origins: { color: "#7bc47f", label: "Origins — 30K", url: null, parser: null },
+        legacy:  { color: "#e8a838", label: "Legacy — 100K", url: window.ROUTE_GPX_URL, parser: "gpx", cutOff: "16 Hours", surface: "Road &amp; Trail", aid: "12" },
+        heritage:{ color: "#5b9ecf", label: "Heritage — 50K", url: window.ROUTE_KML_URL, parser: "kml", cutOff: "8 Hours", surface: "Mixed Terrain", aid: "12" },
+        origins: { color: "#7bc47f", label: "Origins — 30K", url: window.ROUTE_ORIGINS_URL, parser: "gpx", cutOff: "4 Hours", surface: "Road &amp; Trail", aid: "6" },
     };
 
     // Load each route on demand
@@ -203,12 +129,7 @@ function initRouteMap() {
             return;
         }
         const cfg = config[key];
-        if (!cfg || !cfg.url) {
-            if (key === "origins") {
-                statsEl.innerHTML = '<span>📍 Origins (30K) route coming soon — stay tuned.</span>';
-            }
-            return;
-        }
+        if (!cfg || !cfg.url) return;
 
         fetch(cfg.url)
             .then(r => r.text())

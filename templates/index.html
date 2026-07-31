@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ranbakure — Shekhawati Ultra Marathon</title>
-    <meta name="description" content="Shekhawati Ultra — A road ultramarathon through Rajasthan's painted havelis, timeless architecture, and vibrant countryside. Origins 30K, Heritage 53K, Legacy 100K. 27 September 2026.">
+    <meta name="description" content="Shekhawati Ultra — A road ultramarathon through Rajasthan's painted havelis, timeless architecture, and vibrant countryside. Origins 30K, Heritage 50K, Legacy 100K. 27 September 2026.">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon/Untitled-1.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
@@ -51,8 +51,6 @@
             ></iframe>
         </div>
 
-        <canvas id="particleCanvas"></canvas>
-
         <div class="hero-content">
             <div class="hero-badge">
                 <span class="badge-dot"></span> 27 September 2026 &bull; Nawalgarh, Rajasthan
@@ -75,7 +73,7 @@
             </div>
             <div class="hero-distances">
                 <span class="dist-badge">🏁 Origins — 30K</span>
-                <span class="dist-badge">🏛️ Heritage — 53K</span>
+                <span class="dist-badge">🏛️ Heritage — 50K</span>
                 <span class="dist-badge">⚔️ Legacy — 100K</span>
             </div>
         </div>
@@ -99,7 +97,7 @@
             <p>Created by Ranbakure, Shekhawati Ultra is a road ultramarathon that celebrates the soul of a place through the language of running.</p>
             <p>The roads of Shekhawati have carried merchants, artists, travellers, and generations of communities that shaped one of India's richest cultural landscapes. They have witnessed centuries of craftsmanship, resilience, and tradition. On race day, they will welcome runners from around the world to become part of that continuing story.</p>
             <p>Every turn reveals something worth remembering — painted havelis, timeless architecture, vibrant local life, and the quiet beauty of Rajasthan's countryside. This is not a course designed simply to measure distance; it is a journey designed to create connection.</p>
-            <p>Whether you choose <strong>Origins (30K)</strong>, <strong>Heritage (53K)</strong>, or <strong>Legacy (100K)</strong>, every kilometre invites you to experience Shekhawati with curiosity, respect, and purpose.</p>
+            <p>Whether you choose <strong>Origins (30K)</strong>, <strong>Heritage (50K)</strong>, or <strong>Legacy (100K)</strong>, every kilometre invites you to experience Shekhawati with curiosity, respect, and purpose.</p>
             <p class="about-closing">At Ranbakure, we don't begin with a route. We begin with a place. We listen to its stories, learn from its people, and only then create the race.</p>
             <p class="about-closing"><em>Because every race is our tribute to the place.</em></p>
         </div>
@@ -135,34 +133,117 @@
             </div>
         </div>
 
-        <!-- Distance Tabs -->
-        <div class="distance-tabs" id="distanceTabs">
-            <button class="dist-tab active" data-dist="30">🏁 Origins — 30 KM</button>
-            <button class="dist-tab" data-dist="53">🏛️ Heritage — 53 KM</button>
-            <button class="dist-tab" data-dist="100">⚔️ Legacy — 100 KM</button>
-        </div>
+        <!-- ===== CHOOSE YOUR BATTLE ===== -->
+        <div class="battle-section" data-scroll>
+            <div class="section-header">
+                <span class="section-tag">Choose Your Battle</span>
+                <h2>Pick Your Distance</h2>
+            </div>
+            <div class="battle-cards">
+                <!-- Origins 30K -->
+                <div class="battle-card">
+                    <div class="battle-card-top">
+                        <span class="battle-icon">🏁</span>
+                        <span class="battle-dist">30K</span>
+                        <span class="battle-name">ORIGINS</span>
+                    </div>
+                    <div class="battle-route-preview">
+                        <svg viewBox="0 0 280 80" class="battle-route-svg">
+                            <path d="M10,65 C40,60 60,20 100,35 S160,15 200,40 S250,25 270,30" fill="none" stroke="#7bc47f" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="10" cy="65" r="3" fill="#7bc47f"/>
+                            <circle cx="270" cy="30" r="3" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="battle-stats">
+                        <div class="battle-stat">
+                            <span class="bs-label">DISTANCE</span>
+                            <span class="bs-value">30.0 KM</span>
+                        </div>
+                        <div class="battle-stat">
+                            <span class="bs-label">CUT-OFF</span>
+                            <span class="bs-value">4 HOURS</span>
+                        </div>
+                        <div class="battle-stat">
+                            <span class="bs-label">SURFACE</span>
+                            <span class="bs-value">ROAD &amp; TRAIL</span>
+                        </div>
+                        <div class="battle-stat">
+                            <span class="bs-label">AID STATIONS</span>
+                            <span class="bs-value">6 POINTS</span>
+                        </div>
+                    </div>
+                    <a href="https://konfhub.com/shekhawati-ultra" target="_blank" rel="noopener" class="battle-btn">SELECT CHALLENGE →</a>
+                </div>
 
-        <div class="distance-panels">
-            <div class="dist-panel active" data-panel="30">
-                <div class="dist-detail">
-                    <span class="dist-label">Cut-off Time</span>
-                    <span class="dist-value">4 Hours</span>
+                <!-- Heritage 50K -->
+                <div class="battle-card featured">
+                    <div class="battle-card-top">
+                        <span class="battle-icon">🏛️</span>
+                        <span class="battle-dist">50K</span>
+                        <span class="battle-name">HERITAGE</span>
+                    </div>
+                    <div class="battle-route-preview">
+                        <svg viewBox="0 0 280 80" class="battle-route-svg">
+                            <path d="M10,50 C30,45 50,10 90,30 S140,60 180,25 S230,10 260,40" fill="none" stroke="#5b9ecf" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="10" cy="50" r="3" fill="#5b9ecf"/>
+                            <circle cx="260" cy="40" r="3" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="battle-stats">
+                        <div class="battle-stat">
+                            <span class="bs-label">DISTANCE</span>
+                            <span class="bs-value">50.0 KM</span>
+                        </div>
+                        <div class="battle-stat">
+                            <span class="bs-label">CUT-OFF</span>
+                            <span class="bs-value">8 HOURS</span>
+                        </div>
+                        <div class="battle-stat">
+                            <span class="bs-label">SURFACE</span>
+                            <span class="bs-value">MIXED TERRAIN</span>
+                        </div>
+                        <div class="battle-stat">
+                            <span class="bs-label">AID STATIONS</span>
+                            <span class="bs-value">12 POINTS</span>
+                        </div>
+                    </div>
+                    <a href="https://konfhub.com/shekhawati-ultra" target="_blank" rel="noopener" class="battle-btn">SELECT CHALLENGE →</a>
                 </div>
-                <p class="dist-desc">A fast, accessible introduction to ultramarathon running through the heart of Shekhawati.</p>
-            </div>
-            <div class="dist-panel" data-panel="53">
-                <div class="dist-detail">
-                    <span class="dist-label">Cut-off Time</span>
-                    <span class="dist-value">8 Hours</span>
+
+                <!-- Legacy 100K -->
+                <div class="battle-card">
+                    <div class="battle-card-top">
+                        <span class="battle-icon">⚔️</span>
+                        <span class="battle-dist">100K</span>
+                        <span class="battle-name">LEGACY</span>
+                    </div>
+                    <div class="battle-route-preview">
+                        <svg viewBox="0 0 280 80" class="battle-route-svg">
+                            <path d="M10,40 C25,35 45,65 80,40 S120,10 160,45 S200,70 240,30 S260,10 270,25" fill="none" stroke="#e8a838" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="10" cy="40" r="3" fill="#e8a838"/>
+                            <circle cx="270" cy="25" r="3" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="battle-stats">
+                        <div class="battle-stat">
+                            <span class="bs-label">DISTANCE</span>
+                            <span class="bs-value">100.0 KM</span>
+                        </div>
+                        <div class="battle-stat">
+                            <span class="bs-label">CUT-OFF</span>
+                            <span class="bs-value">16 HOURS</span>
+                        </div>
+                        <div class="battle-stat">
+                            <span class="bs-label">SURFACE</span>
+                            <span class="bs-value">ROAD &amp; TRAIL</span>
+                        </div>
+                        <div class="battle-stat">
+                            <span class="bs-label">AID STATIONS</span>
+                            <span class="bs-value">12 POINTS</span>
+                        </div>
+                    </div>
+                    <a href="https://konfhub.com/shekhawati-ultra" target="_blank" rel="noopener" class="battle-btn">SELECT CHALLENGE →</a>
                 </div>
-                <p class="dist-desc">The perfect middle distance — challenging enough to demand respect, framed by breathtaking heritage views.</p>
-            </div>
-            <div class="dist-panel" data-panel="100">
-                <div class="dist-detail">
-                    <span class="dist-label">Cut-off Time</span>
-                    <span class="dist-value">16 Hours</span>
-                </div>
-                <p class="dist-desc">The ultimate test. Run from dawn to dusk across the full canvas of Shekhawati's timeless landscape.</p>
             </div>
         </div>
 
@@ -188,12 +269,12 @@
         <!-- Route Map -->
         <div class="route-map-section" data-scroll>
             <div class="section-header">
-                <h2>Route Maps</h2>
-                <p>Explore the official race routes</p>
+                <h2>The Ultra Route</h2>
+                <p>Your road through Rajasthan</p>
             </div>
             <div class="distance-tabs" id="routeTabs">
                 <button class="dist-tab active" data-route="legacy">⚔️ Legacy — 100K</button>
-                <button class="dist-tab" data-route="heritage">🏛️ Heritage — 53K</button>
+                <button class="dist-tab" data-route="heritage">🏛️ Heritage — 50K</button>
                 <button class="dist-tab" data-route="origins">🏁 Origins — 30K</button>
             </div>
             <div class="route-map" id="routeMap"></div>
@@ -307,6 +388,7 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
+        window.ROUTE_ORIGINS_URL = "{{ url_for('static', filename='Routes/Routes-30k_ROUTE20260723214249.gpx') }}";
         window.ROUTE_GPX_URL = "{{ url_for('static', filename='Routes/Routes-SHEKHAWATI_100K20260717164107.gpx') }}";
         window.ROUTE_KML_URL = "{{ url_for('static', filename='Routes/Routes-SHEKHWATI_ULTRA_55k_Route20260718132805.kml') }}";
     </script>
