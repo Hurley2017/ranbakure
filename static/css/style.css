@@ -171,7 +171,7 @@ body {
     margin-bottom: 28px; letter-spacing: 1px;
 }
 .hero-badge-below {
-    margin-bottom: 0; margin-top: 24px;
+    margin-bottom: 0; margin-top: 72px;
 }
 .badge-dot {
     width: 6px; height: 6px; border-radius: 50%;
@@ -198,7 +198,7 @@ body {
 .hero-cta-group {
     display: flex; align-items: center; justify-content: center;
     gap: 14px; flex-wrap: wrap;
-    margin-top: 40px;
+    margin-top: 120px;
 }
 
 .btn-hero {
