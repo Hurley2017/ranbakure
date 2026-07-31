@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon/Untitled-1.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
@@ -304,7 +304,7 @@
         </div>
     </footer>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.js"></script>
     <script>
         window.ROUTE_GPX_URL = "{{ url_for('static', filename='Routes/Routes-SHEKHAWATI_100K20260717164107.gpx') }}";
         window.ROUTE_KML_URL = "{{ url_for('static', filename='Routes/Routes-SHEKHWATI_ULTRA_55k_Route20260718132805.kml') }}";

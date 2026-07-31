@@ -545,23 +545,20 @@ footer {
     font-size: 0.82rem; color: var(--text-muted);
 }
 .legend-line {
-    display: inline-block; width: 24px; height: 3px;
+    display: inline-block; width: 28px; height: 3px;
     border-radius: 2px;
 }
-.legend-legacy .legend-line { background: #e8a838; }
-.legend-heritage .legend-line { background: #6bafd4; }
+.legend-legacy .legend-line { background: #e8a838; box-shadow: 0 0 8px rgba(232,168,56,0.5); }
+.legend-heritage .legend-line { background: #5b9ecf; box-shadow: 0 0 8px rgba(91,158,207,0.5); }
 
 .route-map {
-    width: 100%; height: 480px; max-width: 1000px;
+    width: 100%; height: 500px; max-width: 1000px;
     margin: 0 auto;
     border-radius: var(--radius);
     border: 1px solid var(--black-border);
     overflow: hidden;
-    background: var(--black-card);
+    background: #0d0d0d;
 }
-/* Dark tile override */
-.route-map .leaflet-tile { filter: grayscale(100%) invert(92%) hue-rotate(180deg) brightness(0.9); }
-.route-map .leaflet-container { background: #111; }
 
 .route-stats {
     display: flex; justify-content: center; gap: 32px;
@@ -570,9 +567,46 @@ footer {
 }
 .route-stats span strong { color: var(--gold); }
 
-/* ========== ROUTE MAP RESPONSIVE ========== */
+/* MapLibre popup override */
+.maplibregl-popup-content {
+    background: #1a1a1a !important;
+    color: #d4d4d4 !important;
+    border: 1px solid #333 !important;
+    border-radius: 8px !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 0.85rem !important;
+    padding: 10px 14px !important;
+}
+.maplibregl-popup-tip { border-top-color: #1a1a1a !important; }
+.maplibregl-popup-close-button { color: #888 !important; font-size: 1.1rem !important; }
+
+/* Pulsing MJF marker */
+.mjf-marker { position: relative; width: 24px; height: 24px; }
+.mjf-dot {
+    position: absolute; top: 50%; left: 50%;
+    width: 14px; height: 14px;
+    margin: -7px 0 0 -7px;
+    background: #c9a24e;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    z-index: 2;
+}
+.mjf-pulse {
+    position: absolute; top: 50%; left: 50%;
+    width: 24px; height: 24px;
+    margin: -12px 0 0 -12px;
+    background: rgba(201,162,78,0.3);
+    border-radius: 50%;
+    z-index: 1;
+    animation: mjfPulse 2s ease-out infinite;
+}
+@keyframes mjfPulse {
+    0% { transform: scale(0.6); opacity: 1; }
+    100% { transform: scale(2.2); opacity: 0; }
+}
+
 @media (max-width: 768px) {
-    .route-map { height: 320px; }
+    .route-map { height: 340px; }
 }
 
 /* ========== SCROLL REVEAL DEFAULT ========== */
