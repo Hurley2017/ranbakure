@@ -185,22 +185,19 @@
             </div>
         </div>
 
-        <!-- Route Maps -->
+        <!-- Route Map -->
         <div class="route-map-section" data-scroll>
             <div class="section-header">
                 <h2>Route Maps</h2>
                 <p>Explore the official race routes</p>
             </div>
-            <div class="dual-maps">
-                <div class="map-card">
-                    <div class="map-label"><span class="map-dot" style="background:#e8a838"></span> Legacy — 100K</div>
-                    <div id="routeMap100" class="route-map"></div>
-                </div>
-                <div class="map-card">
-                    <div class="map-label"><span class="map-dot" style="background:#5b9ecf"></span> Heritage — 53K</div>
-                    <div id="routeMap53" class="route-map"></div>
-                </div>
+            <div class="distance-tabs" id="routeTabs">
+                <button class="dist-tab active" data-route="legacy">⚔️ Legacy — 100K</button>
+                <button class="dist-tab" data-route="heritage">🏛️ Heritage — 53K</button>
+                <button class="dist-tab" data-route="origins">🏁 Origins — 30K</button>
             </div>
+            <div class="route-map" id="routeMap"></div>
+            <div class="route-stats" id="routeStats"></div>
         </div>
     </section>
 

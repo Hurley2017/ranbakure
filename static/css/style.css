@@ -402,45 +402,19 @@ section { padding: 100px 24px; position: relative; }
 }
 .support-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
 
-/* ========== ROUTE MAPS (Dual) ========== */
+/* ========== ROUTE MAP ========== */
 .route-map-section { margin-top: 48px; }
 .route-map-section .section-header { margin-bottom: 24px; }
 
-.dual-maps {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 20px; max-width: 1100px; margin: 0 auto;
-}
-.map-card {
-    background: var(--black-card);
-    border: 1px solid var(--black-border);
-    border-radius: var(--radius);
-    overflow: hidden;
-}
-.map-label {
-    padding: 12px 16px;
-    font-size: 0.85rem; font-weight: 600;
-    color: var(--text);
-    background: rgba(0,0,0,0.4);
-    border-bottom: 1px solid var(--black-border);
-    display: flex; align-items: center; gap: 8px;
-    letter-spacing: 0.5px;
-}
-.map-dot {
-    display: inline-block; width: 10px; height: 10px;
-    border-radius: 50%;
-}
 .route-map {
-    width: 100%; height: 420px;
+    width: 100%; height: 480px; max-width: 1000px;
+    margin: 20px auto 0;
+    border-radius: var(--radius);
+    border: 1px solid var(--black-border);
+    overflow: hidden;
     background: #0a0a0a;
 }
 .route-map .leaflet-container { background: #0a0a0a; }
-
-/* Dark tile filter for CARTO dark tiles */
-.route-map .leaflet-tile {
-    filter: none !important;
-}
-
-/* Leaflet attribution & controls */
 .route-map .leaflet-control-attribution { display: none !important; }
 .route-map .leaflet-control-zoom a {
     background: #1a1a1a !important;
@@ -454,6 +428,13 @@ section { padding: 100px 24px; position: relative; }
     font-family: 'Poppins', sans-serif !important;
 }
 .route-map .leaflet-popup-tip { background: #1a1a1a !important; }
+
+.route-stats {
+    text-align: center; margin-top: 12px;
+    font-size: 0.82rem; color: var(--text-muted);
+}
+.route-stats span { margin: 0 12px; }
+.route-stats strong { color: var(--gold); }
 
 /* MJF marker (Leaflet) */
 .mjf-leaflet-marker { background: none !important; border: none !important; }
@@ -476,9 +457,10 @@ section { padding: 100px 24px; position: relative; }
 }
 
 @media (max-width: 768px) {
-    .dual-maps { grid-template-columns: 1fr; }
     .route-map { height: 300px; }
 }
+
+/* ========== CATEGORIES ========== */
 .categories { background: var(--black-soft); }
 .cat-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
