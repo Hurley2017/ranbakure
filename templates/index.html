@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon/Untitled-1.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
@@ -184,24 +185,18 @@
             </div>
         </div>
 
-        <!-- Route Downloads -->
-        <div class="route-downloads" data-scroll>
+        <!-- Route Map -->
+        <div class="route-map-section" data-scroll>
             <div class="section-header">
                 <h2>Route Maps</h2>
-                <p>Download official GPX and KML route files</p>
+                <p>Explore the official race routes below</p>
             </div>
-            <div class="route-buttons">
-                <a href="{{ url_for('static', filename='Routes/Routes-SHEKHAWATI_100K20260717164107.gpx') }}" class="btn-route" download>
-                    <span class="route-icon">🗺️</span>
-                    <span>100K Route</span>
-                    <span class="route-format">.GPX</span>
-                </a>
-                <a href="{{ url_for('static', filename='Routes/Routes-SHEKHWATI_ULTRA_55k_Route20260718132805.kml') }}" class="btn-route" download>
-                    <span class="route-icon">📍</span>
-                    <span>53K Route</span>
-                    <span class="route-format">.KML</span>
-                </a>
+            <div class="route-legend">
+                <span class="legend-item legend-legacy"><span class="legend-line"></span> Legacy — 100K</span>
+                <span class="legend-item legend-heritage"><span class="legend-line"></span> Heritage — 53K</span>
             </div>
+            <div id="routeMap" class="route-map"></div>
+            <div class="route-stats" id="routeStats"></div>
         </div>
     </section>
 
@@ -309,6 +304,11 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        window.ROUTE_GPX_URL = "{{ url_for('static', filename='Routes/Routes-SHEKHAWATI_100K20260717164107.gpx') }}";
+        window.ROUTE_KML_URL = "{{ url_for('static', filename='Routes/Routes-SHEKHWATI_ULTRA_55k_Route20260718132805.kml') }}";
+    </script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

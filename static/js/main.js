@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initDistanceTabs();
     initScrollReveal();
     initParticles();
+    initRouteMap();
 });
 
 /* ---------- LOADER ---------- */
@@ -165,3 +166,132 @@ function initParticles() {
     }
     animate();
 }
+
+/* ---------- ROUTE MAP ---------- */
+function initRouteMap() {
+    const mapEl = document.getElementById("routeMap");
+    if (!mapEl || typeof L === "undefined") return;
+
+    const map = L.map("routeMap", {
+        center: [27.85, 75.27], // Nawalgarh area
+        zoom: 12,
+        scrollWheelZoom: false,
+        attributionControl: false,
+    });
+
+    // Dark-themed tiles
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+        attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+        subdomains: "abcd",
+        maxZoom: 19,
+    }).addTo(map);
+
+    let bounds = L.latLngBounds();
+    const statsEl = document.getElementById("routeStats");
+    let loadedCount = 0;
+    const statsData = [];
+
+    // Color config per route
+    const routeConfig = {
+        gpx: { color: "#e8a838", weight: 4, opacity: 0.9, label: "Legacy — 100K" },
+        kml: { color: "#6bafd4", weight: 4, opacity: 0.9, label: "Heritage — 53K" },
+    };
+
+    // Parse GPX
+    if (window.ROUTE_GPX_URL) {
+        fetch(window.ROUTE_GPX_URL)
+            .then(r => r.text())
+            .then(xml => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(xml, "application/xml");
+                const tracks = doc.querySelectorAll("trkpt");
+                const pts = [];
+                tracks.forEach(pt => {
+                    const lat = parseFloat(pt.getAttribute("lat"));
+                    const lon = parseFloat(pt.getAttribute("lon"));
+                    if (!isNaN(lat) && !isNaN(lon)) pts.push([lat, lon]);
+                });
+                if (pts.length) {
+                    const poly = L.polyline(pts, routeConfig.gpx).addTo(map);
+                    pts.forEach(p => bounds.extend(p));
+                    const dist = calcDistance(pts);
+                    statsData.push({ label: routeConfig.gpx.label, dist, color: routeConfig.gpx.color });
+                    loadedCount++;
+                    updateStats();
+                }
+            })
+            .catch(() => console.warn("GPX load failed"));
+    }
+
+    // Parse KML
+    if (window.ROUTE_KML_URL) {
+        fetch(window.ROUTE_KML_URL)
+            .then(r => r.text())
+            .then(xml => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(xml, "application/xml");
+                const coordsEl = doc.querySelector("coordinates");
+                if (!coordsEl) return;
+                const raw = coordsEl.textContent.trim();
+                const pts = [];
+                raw.split(/\s+/).forEach(triple => {
+                    const [lon, lat] = triple.split(",").map(Number);
+                    if (!isNaN(lat) && !isNaN(lon)) pts.push([lat, lon]);
+                });
+                if (pts.length) {
+                    L.polyline(pts, routeConfig.kml).addTo(map);
+                    pts.forEach(p => bounds.extend(p));
+                    const dist = calcDistance(pts);
+                    statsData.push({ label: routeConfig.kml.label, dist, color: routeConfig.kml.color });
+                    loadedCount++;
+                    updateStats();
+                }
+            })
+            .catch(() => console.warn("KML load failed"));
+    }
+
+    function updateStats() {
+        if (statsEl && statsData.length) {
+            statsEl.innerHTML = statsData
+                .map(d => `<span><span style="color:${d.color}">●</span> <strong>${d.label}:</strong> ~${Math.round(d.dist)} km</span>`)
+                .join("");
+        }
+    }
+
+    // Fit bounds after routes load (polling)
+    const fitInterval = setInterval(() => {
+        if (bounds.isValid()) {
+            map.fitBounds(bounds, { padding: [40, 40] });
+            clearInterval(fitInterval);
+        }
+    }, 500);
+    // Safety stop
+    setTimeout(() => clearInterval(fitInterval), 8000);
+
+    // Add start/finish marker at MJF Sports Ground
+    const mjf = [27.8515, 75.2680];
+    L.circleMarker(mjf, {
+        radius: 8,
+        color: "#fff",
+        fillColor: "#c9a24e",
+        fillOpacity: 1,
+        weight: 2,
+    }).addTo(map).bindPopup("<strong>MJF Sports Ground</strong><br>Start &amp; Finish").openPopup();
+    bounds.extend(mjf);
+}
+
+/* Haversine distance for polyline points */
+function calcDistance(pts) {
+    const R = 6371;
+    let d = 0;
+    for (let i = 1; i < pts.length; i++) {
+        const [lat1, lon1] = pts[i - 1];
+        const [lat2, lon2] = pts[i];
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+        const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+        d += R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+    return d;
+}
+

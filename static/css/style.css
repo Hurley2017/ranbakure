@@ -402,36 +402,7 @@ section { padding: 100px 24px; position: relative; }
 }
 .support-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
 
-/* Route Downloads */
-.route-downloads {
-    margin-top: 48px; text-align: center;
-    opacity: 0; transform: translateY(30px);
-}
-.route-downloads.visible {
-    opacity: 1; transform: translateY(0);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.route-buttons {
-    display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
-}
-.btn-route {
-    display: flex; align-items: center; gap: 10px;
-    background: var(--black-card);
-    border: 1px solid var(--black-border);
-    border-radius: var(--radius);
-    padding: 14px 24px; color: var(--text);
-    text-decoration: none; font-size: 0.9rem;
-    transition: var(--transition);
-}
-.btn-route:hover {
-    border-color: var(--gold);
-    background: rgba(201,162,78,0.05);
-}
-.route-icon { font-size: 1.3rem; }
-.route-format {
-    font-size: 0.7rem; color: var(--gold);
-    text-transform: uppercase; letter-spacing: 1px;
-}
+/* ========== ROUTE MAP ========== */
 
 /* ========== CATEGORIES ========== */
 .categories { background: var(--black-soft); }
@@ -559,6 +530,49 @@ footer {
 .footer-bottom {
     font-size: 0.75rem; color: var(--text-dim);
     margin-top: 12px;
+}
+
+/* ========== ROUTE MAP ========== */
+.route-map-section { margin-top: 48px; }
+.route-map-section .section-header { margin-bottom: 24px; }
+
+.route-legend {
+    display: flex; justify-content: center; gap: 24px;
+    margin-bottom: 16px; flex-wrap: wrap;
+}
+.legend-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.82rem; color: var(--text-muted);
+}
+.legend-line {
+    display: inline-block; width: 24px; height: 3px;
+    border-radius: 2px;
+}
+.legend-legacy .legend-line { background: #e8a838; }
+.legend-heritage .legend-line { background: #6bafd4; }
+
+.route-map {
+    width: 100%; height: 480px; max-width: 1000px;
+    margin: 0 auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--black-border);
+    overflow: hidden;
+    background: var(--black-card);
+}
+/* Dark tile override */
+.route-map .leaflet-tile { filter: grayscale(100%) invert(92%) hue-rotate(180deg) brightness(0.9); }
+.route-map .leaflet-container { background: #111; }
+
+.route-stats {
+    display: flex; justify-content: center; gap: 32px;
+    margin-top: 16px; flex-wrap: wrap;
+    font-size: 0.82rem; color: var(--text-muted);
+}
+.route-stats span strong { color: var(--gold); }
+
+/* ========== ROUTE MAP RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .route-map { height: 320px; }
 }
 
 /* ========== SCROLL REVEAL DEFAULT ========== */
