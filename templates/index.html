@@ -26,10 +26,10 @@
         </div>
         <div class="nav-links" id="navLinks">
             <a href="#home">Home</a>
+            <a href="#countdown">Countdown</a>
             <a href="#about">About</a>
-            <a href="#race-info">Race Info</a>
-            <a href="#categories">Categories</a>
-            <a href="#travel">Travel</a>
+            <a href="#battle">Distances</a>
+            <a href="#route">Route</a>
             <a href="#register" class="nav-cta">Register</a>
         </div>
         <button class="nav-toggle" id="navToggle" aria-label="Menu">
@@ -71,7 +71,33 @@
         </div>
     </section>
 
-    <!-- ========== ABOUT SHEKHAWATI ULTRA ========== -->
+    <!-- ========== 1. COUNTDOWN ========== -->
+    <section class="countdown" id="countdown">
+        <span class="cd-header">RACE STARTS IN</span>
+        <div class="countdown-timer" id="countdownTimer">
+            <div class="cd-block">
+                <span class="cd-number" id="cd-days">00</span>
+                <span class="cd-label">Days</span>
+            </div>
+            <span class="cd-sep">:</span>
+            <div class="cd-block">
+                <span class="cd-number" id="cd-hours">00</span>
+                <span class="cd-label">Hrs</span>
+            </div>
+            <span class="cd-sep">:</span>
+            <div class="cd-block">
+                <span class="cd-number" id="cd-mins">00</span>
+                <span class="cd-label">Mins</span>
+            </div>
+            <span class="cd-sep">:</span>
+            <div class="cd-block">
+                <span class="cd-number" id="cd-secs">00</span>
+                <span class="cd-label">Secs</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 2. ABOUT ========== -->
     <section class="about" id="about">
         <div class="section-header">
             <span class="section-tag">About Shekhawati Ultra</span>
@@ -90,44 +116,14 @@
         </div>
     </section>
 
-    <!-- ========== RACE INFORMATION ========== -->
-    <section class="race-info" id="race-info">
-        <div class="section-header">
-            <span class="section-tag">Race Information</span>
-            <h2>Shekhawati Ultra 2026</h2>
-        </div>
-
-        <div class="info-grid">
-            <div class="info-card" data-scroll>
-                <div class="info-icon">📅</div>
-                <h3>Date</h3>
-                <p>27 September 2026</p>
-            </div>
-            <div class="info-card" data-scroll>
-                <div class="info-icon">📍</div>
-                <h3>Venue</h3>
-                <p>MJF Sports Ground, Nawalgarh, Rajasthan</p>
-            </div>
-            <div class="info-card" data-scroll>
-                <div class="info-icon">🏁</div>
-                <h3>Start &amp; Finish</h3>
-                <p>MJF Sports Ground</p>
-            </div>
-            <div class="info-card" data-scroll>
-                <div class="info-icon">🛤️</div>
-                <h3>Course Terrain</h3>
-                <p>Road &amp; Trail Mix — smooth roads with scenic trail sections through Shekhawati</p>
-            </div>
-        </div>
-
-        <!-- ===== CHOOSE YOUR BATTLE ===== -->
+    <!-- ========== 3. PICK YOUR DISTANCE ========== -->
+    <section class="battle" id="battle">
         <div class="battle-section" data-scroll>
             <div class="section-header">
                 <span class="section-tag">Choose Your Battle</span>
                 <h2>Pick Your Distance</h2>
             </div>
             <div class="battle-cards">
-                <!-- Origins 30K -->
                 <div class="battle-card">
                     <div class="battle-card-top">
                         <span class="battle-icon">🏁</span>
@@ -142,27 +138,13 @@
                         </svg>
                     </div>
                     <div class="battle-stats">
-                        <div class="battle-stat">
-                            <span class="bs-label">DISTANCE</span>
-                            <span class="bs-value">30.0 KM</span>
-                        </div>
-                        <div class="battle-stat">
-                            <span class="bs-label">CUT-OFF</span>
-                            <span class="bs-value">4 HOURS</span>
-                        </div>
-                        <div class="battle-stat">
-                            <span class="bs-label">SURFACE</span>
-                            <span class="bs-value">ROAD &amp; TRAIL</span>
-                        </div>
-                        <div class="battle-stat">
-                            <span class="bs-label">AID STATIONS</span>
-                            <span class="bs-value">6 POINTS</span>
-                        </div>
+                        <div class="battle-stat"><span class="bs-label">DISTANCE</span><span class="bs-value">30.0 KM</span></div>
+                        <div class="battle-stat"><span class="bs-label">CUT-OFF</span><span class="bs-value">4 HOURS</span></div>
+                        <div class="battle-stat"><span class="bs-label">SURFACE</span><span class="bs-value">ROAD &amp; TRAIL</span></div>
+                        <div class="battle-stat"><span class="bs-label">AID STATIONS</span><span class="bs-value">6 POINTS</span></div>
                     </div>
                     <a href="https://konfhub.com/shekhawati-ultra" target="_blank" rel="noopener" class="battle-btn">SELECT CHALLENGE →</a>
                 </div>
-
-                <!-- Heritage 50K -->
                 <div class="battle-card featured">
                     <div class="battle-card-top">
                         <span class="battle-icon">🏛️</span>
@@ -177,27 +159,13 @@
                         </svg>
                     </div>
                     <div class="battle-stats">
-                        <div class="battle-stat">
-                            <span class="bs-label">DISTANCE</span>
-                            <span class="bs-value">50.0 KM</span>
-                        </div>
-                        <div class="battle-stat">
-                            <span class="bs-label">CUT-OFF</span>
-                            <span class="bs-value">8 HOURS</span>
-                        </div>
-                        <div class="battle-stat">
-                            <span class="bs-label">SURFACE</span>
-                            <span class="bs-value">MIXED TERRAIN</span>
-                        </div>
-                        <div class="battle-stat">
-                            <span class="bs-label">AID STATIONS</span>
-                            <span class="bs-value">12 POINTS</span>
-                        </div>
+                        <div class="battle-stat"><span class="bs-label">DISTANCE</span><span class="bs-value">50.0 KM</span></div>
+                        <div class="battle-stat"><span class="bs-label">CUT-OFF</span><span class="bs-value">8 HOURS</span></div>
+                        <div class="battle-stat"><span class="bs-label">SURFACE</span><span class="bs-value">MIXED TERRAIN</span></div>
+                        <div class="battle-stat"><span class="bs-label">AID STATIONS</span><span class="bs-value">12 POINTS</span></div>
                     </div>
                     <a href="https://konfhub.com/shekhawati-ultra" target="_blank" rel="noopener" class="battle-btn">SELECT CHALLENGE →</a>
                 </div>
-
-                <!-- Legacy 100K -->
                 <div class="battle-card">
                     <div class="battle-card-top">
                         <span class="battle-icon">⚔️</span>
@@ -212,48 +180,19 @@
                         </svg>
                     </div>
                     <div class="battle-stats">
-                        <div class="battle-stat">
-                            <span class="bs-label">DISTANCE</span>
-                            <span class="bs-value">100.0 KM</span>
-                        </div>
-                        <div class="battle-stat">
-                            <span class="bs-label">CUT-OFF</span>
-                            <span class="bs-value">16 HOURS</span>
-                        </div>
-                        <div class="battle-stat">
-                            <span class="bs-label">SURFACE</span>
-                            <span class="bs-value">ROAD &amp; TRAIL</span>
-                        </div>
-                        <div class="battle-stat">
-                            <span class="bs-label">AID STATIONS</span>
-                            <span class="bs-value">12 POINTS</span>
-                        </div>
+                        <div class="battle-stat"><span class="bs-label">DISTANCE</span><span class="bs-value">100.0 KM</span></div>
+                        <div class="battle-stat"><span class="bs-label">CUT-OFF</span><span class="bs-value">16 HOURS</span></div>
+                        <div class="battle-stat"><span class="bs-label">SURFACE</span><span class="bs-value">ROAD &amp; TRAIL</span></div>
+                        <div class="battle-stat"><span class="bs-label">AID STATIONS</span><span class="bs-value">12 POINTS</span></div>
                     </div>
                     <a href="https://konfhub.com/shekhawati-ultra" target="_blank" rel="noopener" class="battle-btn">SELECT CHALLENGE →</a>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Support -->
-        <div class="support-section">
-            <div class="section-header">
-                <h2>Hydration &amp; Medical Support</h2>
-            </div>
-            <div class="support-grid">
-                <div class="support-card" data-scroll>
-                    <div class="support-icon">💧</div>
-                    <h3>12 Hydration Stations</h3>
-                    <p>Positioned across the course providing water, electrolytes, fresh fruits, energy snacks, and basic medical assistance.</p>
-                </div>
-                <div class="support-card" data-scroll>
-                    <div class="support-icon">🩺</div>
-                    <h3>Medical Support</h3>
-                    <p>Ambulance support, medical team, first aid stations, and emergency response team throughout the race.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Route Map -->
+    <!-- ========== 4. THE ULTRA ROUTE ========== -->
+    <section class="route" id="route">
         <div class="route-map-section" data-scroll>
             <div class="section-header">
                 <h2>The Ultra Route</h2>
@@ -282,33 +221,54 @@
         </div>
     </section>
 
-    <!-- ========== COUNTDOWN ========== -->
-    <section class="countdown" id="countdown">
-        <span class="cd-header">RACE STARTS IN</span>
-        <div class="countdown-timer" id="countdownTimer">
-            <div class="cd-block">
-                <span class="cd-number" id="cd-days">00</span>
-                <span class="cd-label">Days</span>
+    <!-- ========== 5. SHEKHAWATI ULTRA 2026 (Race Info) ========== -->
+    <section class="race-info" id="race-info">
+        <div class="section-header">
+            <span class="section-tag">Race Information</span>
+            <h2>Shekhawati Ultra 2026</h2>
+        </div>
+        <div class="info-grid">
+            <div class="info-card" data-scroll>
+                <div class="info-icon">📅</div>
+                <h3>Date</h3>
+                <p>27 September 2026</p>
             </div>
-            <span class="cd-sep">:</span>
-            <div class="cd-block">
-                <span class="cd-number" id="cd-hours">00</span>
-                <span class="cd-label">Hrs</span>
+            <div class="info-card" data-scroll>
+                <div class="info-icon">📍</div>
+                <h3>Venue</h3>
+                <p>MJF Sports Ground, Nawalgarh, Rajasthan</p>
             </div>
-            <span class="cd-sep">:</span>
-            <div class="cd-block">
-                <span class="cd-number" id="cd-mins">00</span>
-                <span class="cd-label">Mins</span>
+            <div class="info-card" data-scroll>
+                <div class="info-icon">🏁</div>
+                <h3>Start &amp; Finish</h3>
+                <p>MJF Sports Ground</p>
             </div>
-            <span class="cd-sep">:</span>
-            <div class="cd-block">
-                <span class="cd-number" id="cd-secs">00</span>
-                <span class="cd-label">Secs</span>
+            <div class="info-card" data-scroll>
+                <div class="info-icon">🛤️</div>
+                <h3>Course Terrain</h3>
+                <p>Road &amp; Trail Mix — smooth roads with scenic trail sections through Shekhawati</p>
+            </div>
+        </div>
+        <div class="support-section">
+            <div class="section-header">
+                <h2>Hydration &amp; Medical Support</h2>
+            </div>
+            <div class="support-grid">
+                <div class="support-card" data-scroll>
+                    <div class="support-icon">💧</div>
+                    <h3>12 Hydration Stations</h3>
+                    <p>Positioned across the course providing water, electrolytes, fresh fruits, energy snacks, and basic medical assistance.</p>
+                </div>
+                <div class="support-card" data-scroll>
+                    <div class="support-icon">🩺</div>
+                    <h3>Medical Support</h3>
+                    <p>Ambulance support, medical team, first aid stations, and emergency response team throughout the race.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ========== TRAVEL INFORMATION ========== -->
+    <!-- ========== 6. GETTING TO NAWALGARH ========== -->
     <section class="travel" id="travel">
         <div class="section-header">
             <span class="section-tag">Travel Information</span>
@@ -336,7 +296,7 @@
         </div>
     </section>
 
-    <!-- ========== WHAT YOU'LL RECEIVE ========== -->
+    <!-- ========== 7. WHAT YOU'LL RECEIVE ========== -->
     <section class="perks" id="perks">
         <div class="section-header">
             <span class="section-tag">Race Kit</span>
@@ -347,7 +307,7 @@
             <div class="perk-item" data-scroll><span class="perk-check">✓</span> Official Event T-shirt</div>
             <div class="perk-item" data-scroll><span class="perk-check">✓</span> Finisher Medal</div>
             <div class="perk-item" data-scroll><span class="perk-check">✓</span> Digital Finisher Certificate</div>
-            <div class="perk-item" data-scroll><span class="perk-check">✓</span> RFID Chip Timing</div>
+            <div class="perk-item" data-scroll><span class="perk-check">✓</span> Volunteer Support</div>
             <div class="perk-item" data-scroll><span class="perk-check">✓</span> Hydration &amp; Nutrition</div>
             <div class="perk-item" data-scroll><span class="perk-check">✓</span> Medical Support</div>
             <div class="perk-item" data-scroll><span class="perk-check">✓</span> Race Photography</div>
@@ -355,7 +315,7 @@
         </div>
     </section>
 
-    <!-- ========== REGISTER CTA ========== -->
+    <!-- ========== 8. RUN THROUGH HISTORY ========== -->
     <section class="register" id="register">
         <div class="register-content">
             <h2>Run Through History</h2>
@@ -375,7 +335,7 @@
         </div>
     </section>
 
-    <!-- ========== PHOTO GALLERY ========== -->
+    <!-- ========== 9. FRAMES FROM THE FIELD ========== -->
     <section class="gallery" id="gallery">
         <div class="section-header">
             <span class="section-tag">LOADING SNAPS...</span>
@@ -396,6 +356,40 @@
             </div>
             <div class="gallery-item gallery-wide">
                 <img src="{{ url_for('static', filename='imges/Sequence 010005.jpg.jpeg') }}" alt="Race moment" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 10. COMMON QUESTIONS ========== -->
+    <section class="faq" id="faq">
+        <div class="section-header">
+            <span class="section-tag">Common Questions</span>
+            <h2>Frequently Asked</h2>
+        </div>
+        <div class="faq-grid">
+            <div class="faq-card" data-scroll>
+                <h3>📋 How do I register?</h3>
+                <p>Registration is through Konfhub — click any <strong>Register</strong> or <strong>SELECT CHALLENGE</strong> button on this page to go directly to the registration portal.</p>
+            </div>
+            <div class="faq-card" data-scroll>
+                <h3>⏰ What time does the race start?</h3>
+                <p>All distances start at <strong>6:00 AM IST</strong> on 27 September 2026 from MJF Sports Ground, Nawalgarh.</p>
+            </div>
+            <div class="faq-card" data-scroll>
+                <h3>🎒 What should I carry?</h3>
+                <p>Your race bib (provided at check-in), comfortable running gear, hydration pack (recommended for 50K &amp; 100K), and a charged phone. Detailed kit list will be emailed pre-race.</p>
+            </div>
+            <div class="faq-card" data-scroll>
+                <h3>🏨 Is accommodation available?</h3>
+                <p>Yes — Nawalgarh has a range of stays from heritage havelis to budget hotels. We'll share recommended options with registered runners. Early booking advised.</p>
+            </div>
+            <div class="faq-card" data-scroll>
+                <h3>🔄 Can I change my distance category?</h3>
+                <p>Distance changes are possible up to <strong>2 weeks before race day</strong>, subject to availability. Contact us via the registration portal.</p>
+            </div>
+            <div class="faq-card" data-scroll>
+                <h3>📸 Will there be race photos?</h3>
+                <p>Absolutely. Professional race photography is included — you'll receive digital photos post-race to remember your Shekhawati journey.</p>
             </div>
         </div>
     </section>
